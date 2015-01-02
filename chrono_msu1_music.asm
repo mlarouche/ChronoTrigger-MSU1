@@ -286,6 +286,10 @@ MSU_PlayMusic:
 	bra .Exit
 	
 MSU_ResumeMusic:
+	lda MSU_STATUS
+	and.b #MSU_STATUS_TRACK_MISSING
+	bne +
+
 	lda.w musicRequested
 	sta currentSong
 	lda #$03
@@ -297,13 +301,19 @@ MSU_ResumeMusic:
 	sta.w musicCommand
 	lda #$00
 	sta.w musicRequested
++
 	sec
 	rts
 	
 MSU_PauseMusic:
+	lda MSU_STATUS
+	and.b #MSU_STATUS_TRACK_MISSING
+	bne +
+	
 	lda #$00
 	sta MSU_AUDIO_CONTROL
 	sta currentSong
++
 	sec
 	rts
 	
