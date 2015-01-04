@@ -10,7 +10,7 @@ The hack has been tested on bsnes 075, higan 094 and SD2SNES.
 = TODO =
 ========
 * Use correct timing for fade-in/fade-out
-* Credits/Epoch fix
+* Credits fix
 * Hook fanfare ?
 * FMV from the PS1 version (Version 2.0)
 
@@ -44,6 +44,15 @@ Use create_pcm.bat to create the .pcm from WAV files.
 ====================
 Drop the ROM file, chrono_msu1.msu and the .pcm files in any folder. (I really suggest creating a folder)
 Launch the game and voilà, enjoy !
+
+===========
+= Credits =
+===========
+* DarkShock - ASM hacking & coding
+
+Special Thanks:
+* Geiger - Chrono Trigger documentation
+* zarradeth - Chrono Trigger music engine documentation
 
 =============
 = Compiling =

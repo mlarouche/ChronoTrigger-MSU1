@@ -81,6 +81,23 @@ org $C335AF
 	nop
 	nop
 
+; Epoch 1999 AD sound check
+org $C30C28
+SoundCheckSuccessful:
+	bra $8B
+	jsl MSU_EpochMode7Fix
+	bcs SoundCheckSuccessful
+	rts
+	
+; Epoch 1999 AD event modification
+; This is a destructive modification
+; Remove syncronisation with music in the event
+org $FA96B1
+	; 10 10 is Event Command Jump Forward ten bytes
+	; This is compressed data so the modification is
+	; replicated 3 times
+	db $10, $10, 0, 0, 0
+	
 ; Relevant calls to $C70004
 ; Found via hex editor by searching for JSL $C70004
 
@@ -318,6 +335,10 @@ MSU_PauseMusic:
 	rts
 	
 MSU_PrepareFade:
+	; Do nothing if a fade is already in progress
+	lda fadeState
+	bne .Exit
+	
 	rep #$20
 	lda #$0000
 	sep #$20
@@ -525,4 +546,37 @@ MSU_WaitSongFinish:
 	bne +
 	inx
 +
+	rtl
+	
+MSU_EpochMode7Fix:
+	rep #$20
+	pha
+	sep #$20
+	
+	%CheckMSUPresence(.OriginalCode)
+	
+	rep #$20
+	pla
+	sec
+	rtl
+	
+.OriginalCode
+	rep #$20
+	pla
+-
+	sep #$20
+	lda $002142
+	cmp $002142
+	bne -
+	
+	and #$0F
+	cmp ($20)
+	bpl .RoutineSuccessful
+	rep #$20
+	dec $20
+	clc
+	rtl
+	
+.RoutineSuccessful:
+	sec
 	rtl

@@ -261,6 +261,44 @@ $C0/3CCD E8          INX                     A:0100 X:0669 Y:0669 P:envMxdiZc
 $C0/3CCE 18          CLC                     A:0100 X:066A Y:0669 P:envMxdizc
 $C0/3CCF 60          RTS                     A:0100 X:066A Y:0669 P:envMxdizc
 
+=====================
+= Epoch 1999 AD fix =
+=====================
+For this fix, we need to modify the event script 114 of location 1B4 (Flying Epoch)
+
+3A8F4F	3A9751	EVENT	Y	(114) Location Event Data	2003.07.10
+
+Event data is compressed but in our case we do want the modification to be replicated 3 times.
+$2142 check in event data = 0x3a96b1
+
+; This is called by the Mode 7 routine
+$C3/0AFF 20 03 0B    JSR $0B03  [$C3:0B03]   A:0B00 X:0008 Y:00B8 P:envmxdIzc
+$C3/0B03 B2 20       LDA ($20)  [$7E:7E9F]   A:0B00 X:0008 Y:00B8 P:envmxdIzc
+$C3/0B05 E6 20       INC $20    [$00:0B20]   A:04F5 X:0008 Y:00B8 P:envmxdIzc
+$C3/0B07 89 80 00    BIT #$0080              A:04F5 X:0008 Y:00B8 P:envmxdIzc
+$C3/0B0A D0 49       BNE $49    [$0B55]      A:04F5 X:0008 Y:00B8 P:envmxdIzc
+$C3/0B55 85 F0       STA $F0    [$00:0BF0]   A:04F5 X:0008 Y:00B8 P:envmxdIzc
+$C3/0B57 29 F0 00    AND #$00F0              A:04F5 X:0008 Y:00B8 P:envmxdIzc
+$C3/0B5A C9 80 00    CMP #$0080              A:00F0 X:0008 Y:00B8 P:envmxdIzc
+$C3/0B5D D0 03       BNE $03    [$0B62]      A:00F0 X:0008 Y:00B8 P:envmxdIzC
+$C3/0B62 C9 90 00    CMP #$0090              A:00F0 X:0008 Y:00B8 P:envmxdIzC
+$C3/0B65 D0 03       BNE $03    [$0B6A]      A:00F0 X:0008 Y:00B8 P:envmxdIzC
+$C3/0B6A A5 F0       LDA $F0    [$00:0BF0]   A:00F0 X:0008 Y:00B8 P:envmxdIzC
+$C3/0B6C 29 0F 00    AND #$000F              A:04F5 X:0008 Y:00B8 P:envmxdIzC
+$C3/0B6F 0A          ASL A                   A:0005 X:0008 Y:00B8 P:envmxdIzC
+$C3/0B70 AA          TAX                     A:000A X:0008 Y:00B8 P:envmxdIzc
+$C3/0B71 7C 74 0B    JMP ($0B74,x)[$C3:0C2A] A:000A X:000A Y:00B8 P:envmxdIzc
+$C3/0C2A E2 20       SEP #$20                A:000A X:000A Y:00B8 P:envmxdIzc
+$C3/0C2C AF 42 21 00 LDA $002142[$00:2142]   A:000A X:000A Y:00B8 P:envMxdIzc
+$C3/0C30 CF 42 21 00 CMP $002142[$00:2142]   A:0000 X:000A Y:00B8 P:envMxdIZc
+$C3/0C34 D0 F4       BNE $F4    [$0C2A]      A:0000 X:000A Y:00B8 P:envMxdIZC
+$C3/0C36 29 0F       AND #$0F                A:0000 X:000A Y:00B8 P:envMxdIZC
+$C3/0C38 D2 20       CMP ($20)  [$7E:7EA0]   A:0000 X:000A Y:00B8 P:envMxdIZC
+$C3/0C3A 10 EC       BPL $EC    [$0C28]      A:0000 X:000A Y:00B8 P:eNvMxdIzc
+$C3/0C3C C2 20       REP #$20                A:0000 X:000A Y:00B8 P:eNvMxdIzc
+$C3/0C3E C6 20       DEC $20    [$00:0B20]   A:0000 X:000A Y:00B8 P:eNvmxdIzc
+$C3/0C40 60          RTS                     A:0000 X:000A Y:00B8 P:envmxdIzc
+
 ============
 = Routines =
 ============
