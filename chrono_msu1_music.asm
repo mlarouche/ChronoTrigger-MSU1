@@ -335,10 +335,6 @@ MSU_PauseMusic:
 	rts
 	
 MSU_PrepareFade:
-	; Do nothing if a fade is already in progress
-	lda fadeState
-	bne .Exit
-	
 	rep #$20
 	lda #$0000
 	sep #$20
@@ -388,6 +384,7 @@ MSU_PrepareFade:
 
 	; Result in 4214 / 4215
 	lda $4214
+	beq .ResetToIdle
 	sta fadeStep
 	bra .Exit
 
@@ -397,6 +394,11 @@ MSU_PrepareFade:
 	sta MSU_AUDIO_VOLUME
 .Exit:
 	rts
+.ResetToIdle
+	lda.b #FADE_STATE_IDLE
+	sta fadeState
+	sta fadeStep
+	bra .SetVolumeImmediate
 	
 TrackNeedLooping:
 	; 1.01 A Premonition
@@ -470,11 +472,14 @@ MSU_UpdateLoop:
 .FadeInUpdate
 	lda fadeVolume
 	clc
+	rep #$20
 	adc fadeStep
 	cmp fadeTarget
 	bcc +
+	sep #$20
 	lda fadeTarget
 +
+	sep #$20
 	sta fadeVolume
 	sta MSU_AUDIO_VOLUME
 	cmp fadeTarget
