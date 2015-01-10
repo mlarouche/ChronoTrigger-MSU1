@@ -1,15 +1,6 @@
 Chrono Trigger
 HiROM 32MBit
 
-========
-= TODO =
-========
-* Fade-in/Fade-out
-* Attract fix
-* Title screen
-* Hook fanfare ?
-* Interrupt music during Marle scene (it's a fade-in/fade-out)
-
 ==============
 = Free Space =
 ==============
@@ -260,6 +251,14 @@ $C0/3CCB D0 01       BNE $01    [$3CCE]      A:010F X:0669 Y:0669 P:envMxdizc
 $C0/3CCD E8          INX                     A:0100 X:0669 Y:0669 P:envMxdiZc
 $C0/3CCE 18          CLC                     A:0100 X:066A Y:0669 P:envMxdizc
 $C0/3CCF 60          RTS                     A:0100 X:066A Y:0669 P:envMxdizc
+
+; When entering switch character on overworld
+$C2/CBE0 AF 43 21 00 LDA $002143[$00:2143]   A:0A00 X:FF01 Y:FFFF P:envMxdiZc
+$C2/CBE4 29 0F       AND #$0F                A:0A00 X:FF01 Y:FFFF P:envMxdiZc
+$C2/CBE6 F0 F8       BEQ $F8    [$CBE0]      A:0A00 X:FF01 Y:FFFF P:envMxdiZc
+$C2/CBE8 4C 16 82    JMP $8216  [$C2:8216]   A:0A0F X:FF01 Y:FFFF P:envMxdizc
+$C2/8216 E2 30       SEP #$30                A:0A0F X:FF01 Y:FFFF P:envMxdizc
+$C2/8218 A6 6E       LDX $6E    [$00:006E]   A:0A0F X:0001 Y:00FF P:envMXdizc
 
 =====================
 = Epoch 1999 AD fix =

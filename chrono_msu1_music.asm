@@ -25,6 +25,8 @@ MSU_STATUS_DATA_BUSY     = %10000000
 FULL_VOLUME = $FF
 DUCKED_VOLUME = $30
 
+BATTLE1_MUSIC = $45
+
 ; =============
 ; = Variables =
 ; =============
@@ -70,6 +72,14 @@ org $C03CC6
 	nop
 	nop
 
+; Wait for song to start (found when switching characters on overworld)
+org $C2CBE0
+	jsl MSU_WaitSongStart
+	nop
+	nop
+	nop
+	nop
+	
 ; Wait for title screen fix
 ; This chunk of code is copied into RAM
 ; by the decompression routine, that's why
@@ -77,7 +87,7 @@ org $C03CC6
 org $C335AF
 	nop
 	db $80
-	jsl TitleScreenWaitFix
+	jsl MSU_WaitSongStart
 	nop
 	nop
 
@@ -305,9 +315,15 @@ MSU_PlayMusic:
 MSU_ResumeMusic:
 	lda MSU_STATUS
 	and.b #MSU_STATUS_TRACK_MISSING
-	bne +
+	bne .CallOriginalCode
 
 	lda.w musicRequested
+	cmp currentSong
+	beq +
+	
+	jmp MSU_PlayMusic
+	
++
 	sta currentSong
 	lda #$03
 	sta MSU_AUDIO_CONTROL
@@ -318,18 +334,24 @@ MSU_ResumeMusic:
 	sta.w musicCommand
 	lda #$00
 	sta.w musicRequested
-+
+.CallOriginalCode
 	sec
 	rts
 	
 MSU_PauseMusic:
+	lda musicRequested
+	cmp.b #BATTLE1_MUSIC
+	beq .PauseMSUMusic
+	
+	jml MSU_PlayMusic
+	
+.PauseMSUMusic:
 	lda MSU_STATUS
 	and.b #MSU_STATUS_TRACK_MISSING
 	bne +
 	
 	lda #$00
 	sta MSU_AUDIO_CONTROL
-	sta currentSong
 +
 	sec
 	rts
@@ -496,7 +518,7 @@ MSU_UpdateLoop:
 	plp
 	jml $000500
 	
-TitleScreenWaitFix:
+MSU_WaitSongStart:
 	php
 	rep #$20
 	pha

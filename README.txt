@@ -11,7 +11,7 @@ The hack has been tested on bsnes 075, higan 094 and SD2SNES.
 ========
 * Use correct timing for fade-in/fade-out
 * Credits fix
-* Hook fanfare ?
+* Epoch 1999 AD Fix: Wait correct number of frames, do not resolve immediately
 * FMV from the PS1 version (Version 2.0)
 
 =====================
