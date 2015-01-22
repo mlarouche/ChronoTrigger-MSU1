@@ -293,9 +293,10 @@ MSU_PlayMusic:
 	lda.w musicRequested
 	sta currentSong
 	
-	; Set SPC music to silence
+	; Set SPC music to silence and disable any fade if any was active
 	lda #$00
 	sta $1E01
+	sta fadeState
 	sec
 	bra .Exit
 
