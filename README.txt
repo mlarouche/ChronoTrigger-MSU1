@@ -4,7 +4,9 @@ by DarkShock
 
 This hack adds CD quality audio to Chrono trigger using the MSU-1 chip invented by byuu. For next version I do hope to include the FMV from the PS1 version !
 
-The hack has been tested on bsnes 075, higan 094 and SD2SNES.
+The hack has been tested on bsnes-plus v073+1, higan 094 and SD2SNES.
+
+BSNES 070, 075 is NOT RECOMMENDED, use bsnes-plus v073.
 
 ========
 = TODO =
@@ -14,12 +16,28 @@ The hack has been tested on bsnes 075, higan 094 and SD2SNES.
 * Epoch 1999 AD Fix: Wait correct number of frames, do not resolve immediately
 * FMV from the PS1 version (Version 2.0)
 
+Notes:
+* Lab 16 intro too long
+* A Desolated World Intro too long
+* The day the world revived intro too long
+* Sealed Door intro too long
+* Factory Ruins intro too long
+* Spekkio intro too long
+* Sealed Chest too long (no looping as well)
+* A Strange Appening intro too long
+* Pause actually pause the music (only in Battle)
+* Fade Bug Trial Rainbow Shell
+* Fade Bug Cyrus Tomb
+* Fade Bug Zeal 2
+* Race Ending Mode 7 animation doesn't work
+* In normal combat with custom music, wrong sfx (hunting grounds Prehistoric)
+* Medina Donjon Bleu Fade
+
 =====================
 = Creating the .pcm =
 =====================
 First get Chrono Symphony album in FLAC format (http://www.thechronosymphony.com/). Extract them all to a folder.
-Run decode_flac to convert FLAC files to WAV files
-Use create_pcm.bat to create the .pcm from WAV files.
+Run make_music_pack.bat to create the music_pack
 
 ===============
 = Using higan =
