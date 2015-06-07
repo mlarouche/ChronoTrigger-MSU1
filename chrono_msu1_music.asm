@@ -1,200 +1,236 @@
-hirom
+arch snes.cpu
 
-; MSU memory map I/O
-MSU_STATUS = $002000
-MSU_ID = $002002
-MSU_AUDIO_TRACK_LO = $002004
-MSU_AUDIO_TRACK_HI = $002005
-MSU_AUDIO_VOLUME = $002006
-MSU_AUDIO_CONTROL = $002007
+// MSU memory map I/O
+constant MSU_STATUS($002000)
+constant MSU_ID($002002)
+constant MSU_AUDIO_TRACK_LO($002004)
+constant MSU_AUDIO_TRACK_HI($002005)
+constant MSU_AUDIO_VOLUME($002006)
+constant MSU_AUDIO_CONTROL($002007)
 
-; SPC communication ports
-SPC_COMM_0 = $2140
-SPC_COMM_1 = $2141
-SPC_COMM_2 = $2142
-SPC_COMM_3 = $2143
+// SPC communication ports
+constant SPC_COMM_0($2140)
+constant SPC_COMM_1($2141)
+constant SPC_COMM_2($2142)
+constant SPC_COMM_3($2143)
 
-; MSU_STATUS possible values
-MSU_STATUS_TRACK_MISSING = $8
-MSU_STATUS_AUDIO_PLAYING = %00010000
-MSU_STATUS_AUDIO_REPEAT  = %00100000
-MSU_STATUS_AUDIO_BUSY    = $40
-MSU_STATUS_DATA_BUSY     = %10000000
+// MSU_STATUS possible values
+constant MSU_STATUS_TRACK_MISSING($8)
+constant MSU_STATUS_AUDIO_PLAYING(%00010000)
+constant MSU_STATUS_AUDIO_REPEAT(%00100000)
+constant MSU_STATUS_AUDIO_BUSY($40)
+constant MSU_STATUS_DATA_BUSY(%10000000)
 
-; Constants
-FULL_VOLUME = $FF
-DUCKED_VOLUME = $30
+// SNES Multiply register
+constant SNES_MUL_OPERAND_A($004202)
+constant SNES_MUL_OPERAND_B($004203)
+constant SNES_DIV_DIVIDEND_L($004204)
+constant SNES_DIV_DIVIDEND_H($004205)
+constant SNES_DIV_DIVISOR($004206)
+constant SNES_DIV_QUOTIENT_L($004214)
+constant SNES_DIV_QUOTIENT_H($004215)
+constant SNES_MUL_DIV_RESULT_L($004216)
+constant SNES_MUL_DIV_RESULT_H($004217)
 
-BATTLE1_MUSIC = $45
+// Constants
+constant FULL_VOLUME($FF)
+constant DUCKED_VOLUME($30)
 
-; =============
-; = Variables =
-; =============
-; Game Variables
-musicCommand = $1E00
-musicRequested = $1E01
-targetVolume = $1E02
+constant BATTLE1_MUSIC($45)
 
-; My own variables
-currentSong = $1EE0
-fadeState = $1EE1
-fadeVolume = $1EE2
-fadeTarget = $1EE4
-fadeStep = $1EE6
+// =============
+// = Variables =
+// =============
+// Game Variables
+variable musicCommand($1E00)
+variable musicRequested($1E01)
+variable targetVolume($1E02)
 
-; fadeState possibles values
-FADE_STATE_IDLE = $00
-FADE_STATE_FADEOUT = $01
-FADE_STATE_FADEIN = $02
+// My own variables
+variable currentSong($1EE0)
+variable fadeState($1EE1)
+variable fadeVolume($1EE2)
+variable fadeTarget($1EE4)
+variable fadeStep($1EE6)
 
-; ==========
-; = Macros =
-; ==========
-macro CheckMSUPresence(labelToJump)
+// fadeState possibles values
+constant FADE_STATE_IDLE($00)
+constant FADE_STATE_FADEOUT($01)
+constant FADE_STATE_FADEIN($02)
+
+// **********
+// * Macros *
+// **********
+// seek converts SNES HiROM address to physical address
+macro seek(variable offset) {
+  origin (offset & $3FFFFF)
+  base offset
+}
+
+macro CheckMSUPresence(labelToJump) {
 	lda MSU_ID
-	cmp #'S'
-	bne <labelToJump>
-endmacro
+	cmp.b #'S'
+	bne {labelToJump}
+}
 
-; ========================
-; = Original code hijack =
-; ========================
+macro WaitMulResult() {
+	nop
+	nop
+	nop
+	nop
+}
 
-; NMI hijack
-org $00FF10
+macro WaitDivResult() {
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+}
+
+// ========================
+// = Original code hijack =
+// ========================
+
+// NMI hijack
+seek($00FF10)
 	jml MSU_UpdateLoop
 
-; Wait for song to finish command
-org $C03CC6
+// Wait for song to finish command
+seek($C03CC6)
 	jsl MSU_WaitSongFinish
 	nop
 	nop
 	nop
 	nop
 
-; Wait for song to start (found when switching characters on overworld)
-org $C2CBE0
+// Wait for song to start (found when switching characters on overworld)
+seek($C2CBE0)
 	jsl MSU_WaitSongStart
 	nop
 	nop
 	nop
 	nop
-	
-; Wait for title screen fix
-; This chunk of code is copied into RAM
-; by the decompression routine, that's why
-; it got a db $80 in the middle
-org $C335AF
+
+// Wait for title screen fix
+// This chunk of code is copied into RAM
+// by the decompression routine, that's why
+// it got a db $80 in the middle
+seek($C335AF)
 	nop
 	db $80
 	jsl MSU_WaitSongStart
 	nop
 	nop
 
-; Epoch 1999 AD sound check
-org $C30C28
+// Epoch 1999 AD sound check
+seek($C30C28)
 SoundCheckSuccessful:
-	bra $8B
+	// Equivalent to bra $0bb5
+	db $80,$8B
 	jsl MSU_EpochMode7Fix
 	bcs SoundCheckSuccessful
 	rts
-	
-; Epoch 1999 AD event modification
-; This is a destructive modification
-; Remove syncronisation with music in the event
-org $FA96B1
-	; 10 10 is Event Command Jump Forward ten bytes
-	; This is compressed data so the modification is
-	; replicated 3 times
+
+// Epoch 1999 AD event modification
+// This is a destructive modification
+// Remove syncronisation with music in the event
+seek($FA96B1)
+	// 10 10 is Event Command Jump Forward ten bytes
+	// This is compressed data so the modification is
+	// replicated 3 times
 	db $10, $10, 0, 0, 0
 	
-; Relevant calls to $C70004
-; Found via hex editor by searching for JSL $C70004
+// Relevant calls to $C70004
+// Found via hex editor by searching for JSL $C70004
 
-org $C01B73
+seek($C01B73)
 	jsl MSU_Main
 	
-; Entering area
-org $C01B8B
+// Entering area
+seek($C01B8B)
 	jsl MSU_Main
 	
-; Entering battle
-org $C01BCE
+// Entering battle
+seek($C01BCE)
 	jsl MSU_Main
 	
-org $C01C2A
+seek($C01C2A)
 	jsl MSU_Main
 	
-; Exiting battle
-org $C01C3A
+// Exiting battle
+seek($C01C3A)
 	jsl MSU_Main
 	
-org $C01C52
+seek($C01C52)
 	jsl MSU_Main
 	
-org $C01CA9
+seek($C01CA9)
 	jsl MSU_Main
 	
-org $C01CB7
+seek($C01CB7)
 	jsl MSU_Main
 	
-org $C01CCF
+seek($C01CCF)
 	jsl MSU_Main
 	
-; Called during attract
-org $C03C43
+// Called during attract
+seek($C03C43)
 	jsl MSU_Main
 	
-org $C03C69
+seek($C03C69)
 	jsl MSU_Main
 	
-org $C03CB4
+seek($C03CB4)
 	jsl MSU_Main
 	
-org $C161DF
+seek($C161DF)
 	jsl MSU_Main
 	
-org $C20462
+seek($C20462)
 	jsl MSU_Main
 	
-org $C223F9
+seek($C223F9)
 	jsl MSU_Main
 	
-org $C22F49
+seek($C22F49)
 	jsl MSU_Main
 	
-org $C2CBF3
+seek($C2CBF3)
 	jsl MSU_Main
 	
-org $C2CC09
+seek($C2CC09)
 	jsl MSU_Main
 	
-org $C309D1
+seek($C309D1)
 	jsl MSU_Main
 	
-org $C30BE9
+seek($C30BE9)
 	jsl MSU_Main
 	
-; Title Screen
-org $C31647
+// Title Screen
+seek($C31647)
 	jsl MSU_Main
 
-org $CD03AB
+seek($CD03AB)
 	jsl MSU_Main
 	
-org $CD0D70
+seek($CD0D70)
 	jsl MSU_Main
 	
-org $CD0D81
+seek($CD0D81)
 	jsl MSU_Main
 	
-; ============
-; = MSU Code =
-; ============
-org $C5F370
-MSU_Main:
+// ============
+// = MSU Code =
+// ============
+seek($C5F370)
+scope MSU_Main: {
 	php
-; Backup A and Y in 16bit mode
+// Backup A and Y in 16bit mode
 	rep #$30
 	pha
 	phx
@@ -202,39 +238,38 @@ MSU_Main:
 	phd
 	phb
 	
-	sep #$20 ; Set all registers to 8 bit mode
+	sep #$20 // Set all registers to 8 bit mode
 	
-	%CheckMSUPresence(.CallOriginalRoutine)
+	CheckMSUPresence(.CallOriginalRoutine)
 	
-.MSUFound:
 	lda.w musicCommand
-	; Play Music
-	cmp #$10
+	// Play Music
+	cmp.b #$10
 	bne +
 	jsr MSU_PlayMusic
 	bcs .CallOriginalRoutine
 	bcc .DoNotCallSPCRoutine
 +
-	; Resume
-	cmp #$11
+	// Resume
+	cmp.b #$11
 	bne +
 	jsr MSU_ResumeMusic
 	bcs .CallOriginalRoutine
 	bcc .DoNotCallSPCRoutine
 +
-	; Interrupt
-	cmp #$14
+	// Interrupt
+	cmp.b #$14
 	bne +
 	jsr MSU_PauseMusic
 	bcs .CallOriginalRoutine
 	bcc .DoNotCallSPCRoutine
 +
-	; Fade
-	cmp #$81
+	// Fade
+	cmp.b #$81
 	bne +
 	jsr MSU_PrepareFade
 +
-; Call original routine
+// Call original routine
 .CallOriginalRoutine:
 	rep #$30
 	plb
@@ -247,7 +282,7 @@ MSU_Main:
 	jsl $C70004
 	rtl
 	
-.DoNotCallSPCRoutine
+.DoNotCallSPCRoutine:
 	rep #$30
 	plb
 	pld
@@ -256,91 +291,94 @@ MSU_Main:
 	pla
 	plp
 	rtl
+}
 
-MSU_PlayMusic:
+scope MSU_PlayMusic: {
 	lda.w musicRequested
 	beq .StopMSUMusic
-	cmp #$FF
+	cmp.b #$FF
 	beq .SongAlreadyPlaying
-	cmp currentSong
+	cmp.w currentSong
 	beq .SongAlreadyPlaying
 	sta MSU_AUDIO_TRACK_LO
-	lda #$00
+	lda.b #$00
 	sta MSU_AUDIO_TRACK_HI
 
-.CheckAudioStatus
+.CheckAudioStatus:
 	lda MSU_STATUS
 	
 	and.b #MSU_STATUS_AUDIO_BUSY
 	bne .CheckAudioStatus
 	
-	; Check if track is missing
+	// Check if track is missing
 	lda MSU_STATUS
 	and.b #MSU_STATUS_TRACK_MISSING
 	bne .StopMSUMusic
 
-	; Play the song
+	// Play the song
 	lda.w musicRequested
 	jsr TrackNeedLooping
 	sta MSU_AUDIO_CONTROL
 	
-	; Set volume
+	// Set volume
 	lda.b #FULL_VOLUME
 	sta.w MSU_AUDIO_VOLUME
 	sta.w fadeVolume
 	
-	; Only store current song if we were able to play the song
+	// Only store current song if we were able to play the song
 	lda.w musicRequested
 	sta currentSong
 	
-	; Set SPC music to silence and disable any fade if any was active
+	// Set SPC music to silence and disable any fade if any was active
 	lda #$00
 	sta $1E01
-	sta fadeState
+	sta.w fadeState
 	sec
 	bra .Exit
 
-.SongAlreadyPlaying
+.SongAlreadyPlaying:
 	clc
-.Exit
+.Exit:
 	rts
 	
-.StopMSUMusic
-	lda #$00
+.StopMSUMusic:
+	lda.b #$00
 	sta MSU_AUDIO_CONTROL
 	sta MSU_AUDIO_VOLUME
-	sta currentSong
+	sta.w currentSong
 	sec
 	bra .Exit
-	
-MSU_ResumeMusic:
+}
+
+scope MSU_ResumeMusic: {
 	lda MSU_STATUS
 	and.b #MSU_STATUS_TRACK_MISSING
 	bne .CallOriginalCode
 
 	lda.w musicRequested
-	cmp currentSong
+	cmp.w currentSong
 	beq +
 	
 	jmp MSU_PlayMusic
 	
 +
 	sta currentSong
-	lda #$03
+	lda.b #$03
 	sta MSU_AUDIO_CONTROL
 	
-	; Play silence after resuming music to
-	; reload correct SFX samples
-	lda #$10
+	// Play silence after resuming music to
+	// reload correct SFX samples
+	lda.b #$10
 	sta.w musicCommand
-	lda #$00
+	lda.b #$00
 	sta.w musicRequested
-.CallOriginalCode
+.CallOriginalCode:
 	sec
 	rts
-	
-MSU_PauseMusic:
-	lda musicRequested
+}
+
+scope MSU_PauseMusic: {
+	lda.w musicRequested
 	cmp.b #BATTLE1_MUSIC
 	beq .PauseMSUMusic
 	
@@ -351,34 +389,35 @@ MSU_PauseMusic:
 	and.b #MSU_STATUS_TRACK_MISSING
 	bne +
 	
-	lda #$00
+	lda.b #$00
 	sta MSU_AUDIO_CONTROL
 +
 	sec
 	rts
-	
-MSU_PrepareFade:
+}
+
+scope MSU_PrepareFade: {
 	rep #$20
 	lda #$0000
 	sep #$20
-	; musicRequested = Fade Time
-	lda musicRequested
+	// musicRequested = Fade Time
+	lda.w musicRequested
 	beq .SetVolumeImmediate
 	
-	; fadeStep = (targetVolume-fadeVolume)/fadeTime
-	lda targetVolume
-	sta fadeTarget
+	// fadeStep = (targetVolume-fadeVolume)/fadeTime
+	lda.w targetVolume
+	sta.w fadeTarget
 	
 	rep #$20
 	sec
-	sbc fadeVolume
-	; If carry is set, the result is a positive number
+	sbc.w fadeVolume
+	// If carry is set, the result is a positive number
 	bcs +
 	
-	; Reverse sign of the result (which in two-complements)
-	; A negative result means a fade-out
-	eor	#$FFFF
-	inc a
+	// Reverse sign of the result (which in two-complements)
+	// A negative result means a fade-out
+	eor #$FFFF
+	inc
 	
 	sep #$30
 	ldx.b #FADE_STATE_FADEOUT
@@ -388,14 +427,14 @@ MSU_PrepareFade:
 	sep #$30
 	ldx.b #FADE_STATE_FADEIN
 	stx.w fadeState
-.DoDivision
-	; Do division using SNES division support
-	sta $4204 ; low
-	stz $4205 ; high byte
-	lda musicRequested ; fadeTime
+.DoDivision:
+	// Do division using SNES division support
+	sta $4204 // low
+	stz $4205 // high byte
+	lda.w musicRequested // fadeTime
 	sta $4206
 	
-	; Wait 16 CPU cycles
+	// Wait 16 CPU cycles
 	nop
 	nop
 	nop
@@ -405,68 +444,70 @@ MSU_PrepareFade:
 	nop
 	nop
 
-	; Result in 4214 / 4215
+	// Result in 4214 / 4215
 	lda $4214
 	beq .ResetToIdle
 	sta fadeStep
 	bra .Exit
 
-.SetVolumeImmediate
-	lda targetVolume
-	sta fadeVolume
+.SetVolumeImmediate:
+	lda.w targetVolume
+	sta.w fadeVolume
 	sta MSU_AUDIO_VOLUME
 .Exit:
 	rts
-.ResetToIdle
+.ResetToIdle:
 	lda.b #FADE_STATE_IDLE
-	sta fadeState
-	sta fadeStep
+	sta.w fadeState
+	sta.w fadeStep
 	bra .SetVolumeImmediate
-	
-TrackNeedLooping:
-	; 1.01 A Premonition
-	cmp #48
+}
+
+scope TrackNeedLooping: {
+	// 1.01 A Premonition
+	cmp.b #48
 	beq .noLooping
-	; 1.03 Morning Glow
-	cmp #15
+	// 1.03 Morning Glow
+	cmp.b #15
 	beq .noLooping
-	; 1.10 Good Night
-	cmp #43
+	// 1.10 Good Night
+	cmp.b #43
 	beq .noLooping
-	; 1.14 Huh ?!
-	cmp #37
+	// 1.14 Huh ?!
+	cmp.b #37
 	beq .noLooping
-	; 1.16 A Prayer for the Wayfarer
-	cmp #36
+	// 1.16 A Prayer for the Wayfarer
+	cmp.b #36
 	beq .noLooping
-	; 2.02 Mystery from the Past
-	cmp #46
+	// 2.02 Mystery from the Past
+	cmp.b #46
 	beq .noLooping
-	; 2.12 Fanfare 2
-	cmp #28
+	// 2.12 Fanfare 2
+	cmp.b #28
 	beq .noLooping
-	; 2.15 Fanfare 3
-	cmp #61
+	// 2.15 Fanfare 3
+	cmp.b #61
 	beq .noLooping
-	; 2.22 Fiedlord's Keep
-	cmp #72
+	// 2.22 Fiedlord's Keep
+	cmp.b #72
 	beq .noLooping
-	lda #$03
+	lda.b #$03
 	rts
-.noLooping
-	lda #$01
+.noLooping:
+	lda.b #$01
 	rts
-	
-MSU_UpdateLoop:
+}
+
+scope MSU_UpdateLoop: {
 	php
 	rep #$20
 	pha
 	
 	sep #$20
 
-	%CheckMSUPresence(.CallNMI)
+	CheckMSUPresence(.CallNMI)
 	
-	lda fadeState
+	lda.w fadeState
 	beq .CallNMI
 	
 	cmp.b #FADE_STATE_FADEOUT
@@ -476,83 +517,85 @@ MSU_UpdateLoop:
 	bra .CallNMI
 	
 .FadeOutUpdate:
-	lda fadeVolume
+	lda.w fadeVolume
 	sec
 	rep #$20
-	sbc fadeStep
-	cmp fadeTarget
+	sbc.w fadeStep
+	cmp.w fadeTarget
 	bpl +
 	sep #$20
 	lda fadeTarget
 +
 	sep #$20
-	sta fadeVolume
+	sta.w fadeVolume
 	sta MSU_AUDIO_VOLUME
-	cmp fadeTarget
+	cmp.w fadeTarget
 	beq .SetToIdle
 	bra .CallNMI
 
-.FadeInUpdate
-	lda fadeVolume
+.FadeInUpdate:
+	lda.w fadeVolume
 	clc
 	rep #$20
-	adc fadeStep
-	cmp fadeTarget
+	adc.w fadeStep
+	cmp.w fadeTarget
 	bcc +
 	sep #$20
 	lda fadeTarget
 +
 	sep #$20
-	sta fadeVolume
+	sta.w fadeVolume
 	sta MSU_AUDIO_VOLUME
-	cmp fadeTarget
+	cmp.w fadeTarget
 	beq .SetToIdle
 	bra .CallNMI
 	
 .SetToIdle:
 	lda.b #FADE_STATE_IDLE
-	sta fadeState
+	sta.w fadeState
 	
-.CallNMI
+.CallNMI:
 	rep #$20
 	pla
 	plp
 	jml $000500
-	
-MSU_WaitSongStart:
+}
+
+scope MSU_WaitSongStart: {
 	php
 	rep #$20
 	pha
 	
 	sep #$20
 
-	%CheckMSUPresence(.OriginalCode)
+	CheckMSUPresence(.OriginalCode)
 	
 	rep #$20
 	pla
 	plp
 	rtl
 	
-.OriginalCode
+.OriginalCode:
 	rep #$20
 	pla
 	plp
 	
-	; Original code
+	// Original code
 -
 	lda $2143
-	and #$0F
+	and.b #$0F
 	beq -
 	
 	rtl
-	
-MSU_WaitSongFinish:
+}
+
+scope MSU_WaitSongFinish: {
 	php
 	rep #$20
 	pha
 	
 	sep #$20
-	%CheckMSUPresence(.OriginalCode)
+	CheckMSUPresence(.OriginalCode)
 	
 	lda MSU_STATUS
 	and.b #(MSU_STATUS_AUDIO_PLAYING|MSU_STATUS_AUDIO_REPEAT)
@@ -564,40 +607,41 @@ MSU_WaitSongFinish:
 	plp
 	rtl
 	
-.OriginalCode
+.OriginalCode:
 	rep #$20
 	pla
 	plp
 	
 	lda $2143
-	and #$0F
+	and.b #$0F
 	bne +
 	inx
 +
 	rtl
-	
-MSU_EpochMode7Fix:
+}
+
+scope MSU_EpochMode7Fix: {
 	rep #$20
 	pha
 	sep #$20
 	
-	%CheckMSUPresence(.OriginalCode)
+	CheckMSUPresence(.OriginalCode)
 	
 	rep #$20
 	pla
 	sec
 	rtl
 	
-.OriginalCode
+.OriginalCode:
 	rep #$20
 	pla
 -
 	sep #$20
-	lda $002142
-	cmp $002142
+	lda SPC_COMM_2
+	cmp SPC_COMM_2
 	bne -
 	
-	and #$0F
+	and.b #$0F
 	cmp ($20)
 	bpl .RoutineSuccessful
 	rep #$20
@@ -608,3 +652,4 @@ MSU_EpochMode7Fix:
 .RoutineSuccessful:
 	sec
 	rtl
+}

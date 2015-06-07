@@ -61,9 +61,9 @@ Source is availabe on GitHub: https://github.com/mlarouche/ChronoTrigger-MSU1
 
 To compile the hack you need
 
-* asar 1.36 (http://www.smwcentral.net/?p=section&a=details&id=6000)
+* bass v14 (https://web.archive.org/web/20140710190910/http://byuu.org/files/bass_v14.tar.xz)
 * flac (https://xiph.org/flac/download.html)
-* wav2msu (http://helmet.kafuka.org/thepile/Wav2msu)
+* wav2msu (https://github.com/mlarouche/wav2msu)
 
 To distribute the hack you need
 
