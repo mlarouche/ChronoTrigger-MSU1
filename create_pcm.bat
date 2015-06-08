@@ -26,7 +26,7 @@ wav2msu -o chrono_msu1-24.pcm chrono_1_02.wav
 wav2msu -o chrono_msu1-27.pcm chrono_1_20.wav
 wav2msu -o chrono_msu1-28.pcm chrono_2_12.wav
 wav2msu -o chrono_msu1-29.pcm chrono_3_03.wav
-wav2msu -o chrono_msu1-30.pcm chrono_1_04.wav
+wav2msu -o chrono_msu1-30.pcm -l 1637104 chrono_1_04.wav
 wav2msu -o chrono_msu1-31.pcm chrono_1_08.wav
 wav2msu -o chrono_msu1-35.pcm chrono_1_22.wav
 wav2msu -o chrono_msu1-36.pcm chrono_1_16.wav

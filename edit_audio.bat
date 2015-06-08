@@ -1,9 +1,12 @@
 @ECHO OFF
 
 sox chrono_1_01_raw.wav -b 16 chrono_1_01.wav trim 1100160s gain -n -1 silence 1 .01 1% rate 44100 dither -s
+sox chrono_1_03_raw.wav -b 16 chrono_1_03.wav trim 0 3328067s gain -n -1 silence 1 .01 1% rate 44100 dither -s
+sox chrono_1_04_raw.wav -b 16 chrono_1_04.wav trim 0 3117856s gain -n -1 silence 1 .01 1% rate 44100 dither -s
+sox chrono_2_15_raw.wav -b 16 chrono_2_15.wav trim 0 171770s gain -n -1 silence 1 .01 1% rate 44100 dither -s
+
 sox chrono_1_02_raw.wav -b 16 chrono_1_02.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_03_raw.wav -b 16 chrono_1_03.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_04_raw.wav -b 16 chrono_1_04.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
+
 sox chrono_1_05_raw.wav -b 16 chrono_1_05.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_1_06_raw.wav -b 16 chrono_1_06.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_1_07_raw.wav -b 16 chrono_1_07.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
@@ -37,7 +40,7 @@ sox chrono_2_11_raw.wav -b 16 chrono_2_11.wav gain -n -1 silence 1 .01 1% rate 4
 sox chrono_2_12_raw.wav -b 16 chrono_2_12.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_2_13_raw.wav -b 16 chrono_2_13.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_2_14_raw.wav -b 16 chrono_2_14.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_15_raw.wav -b 16 chrono_2_15.wav trim 0 171770s gain -n -1 silence 1 .01 1% rate 44100 dither -s
+
 sox chrono_2_16_raw.wav -b 16 chrono_2_16.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_2_17_raw.wav -b 16 chrono_2_17.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_2_18_raw.wav -b 16 chrono_2_18.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
@@ -64,5 +67,3 @@ sox chrono_3_14_raw.wav -b 16 chrono_3_14.wav gain -n -1 silence 1 .01 1% rate 4
 sox chrono_3_15_raw.wav -b 16 chrono_3_15.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_3_16_raw.wav -b 16 chrono_3_16.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_3_17_raw.wav -b 16 chrono_3_17.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-
-rem del *raw.wav
