@@ -34,7 +34,7 @@ flac -d -f -s -o chrono_2_07_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\07 - 
 flac -d -f -s -o chrono_2_08_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\08 - Bike Chase.flac"
 flac -d -f -s -o chrono_2_09_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\09 - Robo_s Theme.flac"
 flac -d -f -s -o chrono_2_10_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\10 - Derelict Factory.flac"
-flac -d -f -s -o chrono_2_11_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\11 - Battle 2.flac"
+rem flac -d -f -s -o chrono_2_11_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\11 - Battle 2.flac"
 flac -d -f -s -o chrono_2_12_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\12 - Fanfare 2.flac"
 flac -d -f -s -o chrono_2_13_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\13 - At the End of Time.flac"
 flac -d -f -s -o chrono_2_14_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\14 - Jolly Ol_ Spekkio.flac"
@@ -49,7 +49,7 @@ flac -d -f -s -o chrono_2_22_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\22 - 
 flac -d -f -s -o chrono_2_23_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\23 - Strains of Insanity.flac"
 flac -d -f -s -o chrono_2_24_raw.wav "Chrono Trigger Symphony Vol 2 (FLAC)\24 - Magus Confronted.flac"
 
-flac -d -f -s -o chrono_3_01_raw.wav "Chrono Trigger Symphony Vol 3 (FLAC)\01 - Singing Mountain.flac"
+rem flac -d -f -s -o chrono_3_01_raw.wav "Chrono Trigger Symphony Vol 3 (FLAC)\01 - Singing Mountain.flac"
 flac -d -f -s -o chrono_3_02_raw.wav "Chrono Trigger Symphony Vol 3 (FLAC)\02 - Tyrano Lair.flac"
 flac -d -f -s -o chrono_3_03_raw.wav "Chrono Trigger Symphony Vol 3 (FLAC)\03 - Depths of the Night.flac"
 flac -d -f -s -o chrono_3_04_raw.wav "Chrono Trigger Symphony Vol 3 (FLAC)\04 - Corridor of Time.flac"

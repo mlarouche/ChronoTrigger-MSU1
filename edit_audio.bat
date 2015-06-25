@@ -1,56 +1,51 @@
 @ECHO OFF
 
 sox chrono_1_01_raw.wav -b 16 chrono_1_01.wav trim 1100160s gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_03_raw.wav -b 16 chrono_1_03.wav trim 0 3328067s gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_04_raw.wav -b 16 chrono_1_04.wav trim 0 3117856s gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_15_raw.wav -b 16 chrono_2_15.wav trim 0 171770s gain -n -1 silence 1 .01 1% rate 44100 dither -s
+sox chrono_1_03_raw.wav -b 16 chrono_1_03.wav trim 0 3328067s gain -n -1 rate 44100 dither -s
+sox chrono_1_04_raw.wav -b 16 chrono_1_04.wav trim 0 3117856s gain -n -1 rate 44100 dither -s
+sox chrono_1_05_raw.wav -b 16 chrono_1_05.wav trim 0 6609941s gain -n -1 rate 44100 dither -s
+sox chrono_1_06_raw.wav -b 16 chrono_1_06.wav trim 0 4533669s gain -n -1 rate 44100 dither -s
+sox chrono_1_07_raw.wav -b 16 chrono_1_07.wav trim 531090s =3257575s gain -n -1 rate 44100 dither -s
+sox chrono_1_08_raw.wav -b 16 chrono_1_08.wav trim 264616s =3423768s gain -n -1 rate 44100 dither -s
+sox chrono_1_09_raw.wav -b 16 chrono_1_09.wav trim 0 4172220s gain -n -1 rate 44100 dither -s
+sox chrono_1_10_raw.wav -b 16 chrono_1_10.wav trim 1557716s =1962187s gain -n -1 rate 44100 dither -s
+sox chrono_1_11_raw.wav -b 16 chrono_1_11.wav trim 0 5928007s gain -n -1 rate 44100 dither -s
+sox chrono_1_13_raw.wav -b 16 chrono_1_13.wav trim 0 4755760s gain -n -1 rate 44100 dither -s
+sox chrono_1_14_raw.wav -b 16 chrono_1_14.wav trim 988302s =1474332s gain -n -1  rate 44100 dither -s
+sox chrono_1_15_raw.wav -b 16 chrono_1_15.wav trim 0 4308404s gain -n -1 rate 44100 dither -s
+sox chrono_1_16_raw.wav -b 16 chrono_1_16.wav trim 1402638s =1919231s gain -n -1 rate 44100 dither -s
+sox chrono_1_17_raw.wav -b 16 chrono_1_17.wav trim 0 3428570s gain -n -1 rate 44100 dither -s
+sox chrono_1_18_raw.wav -b 16 chrono_1_18.wav trim 0 3314593s gain -n -1 rate 44100 dither -s
+sox chrono_1_19_raw.wav -b 16 chrono_1_19.wav trim 0 2205261s gain -n -1 rate 44100 dither -s
+sox chrono_1_20_raw.wav -b 16 chrono_1_20.wav trim 0 2339307s gain -n -1 rate 44100 dither -s
+sox chrono_1_21_raw.wav -b 16 chrono_1_21.wav trim 0 4229283s gain -n -1 rate 44100 dither -s
+sox chrono_1_22_raw.wav -b 16 chrono_1_22.wav trim 0 1685347s gain -n -1 rate 44100 dither -s
+sox chrono_1_23_raw.wav -b 16 chrono_1_23.wav trim 1333s =3640875s gain -n -1 rate 44100 dither -s
+sox chrono_2_01_raw.wav -b 16 chrono_2_01.wav trim 254429s =3089345s gain -n -1 rate 44100 dither -s
+sox chrono_2_02_raw.wav -b 16 chrono_2_02.wav trim 0 366880s gain -n -1 rate 44100 dither -s
+sox chrono_2_03_raw.wav -b 16 chrono_2_03.wav trim 1372562s =3250016s gain -n -1 rate 44100 dither -s
+sox chrono_2_04_raw.wav -b 16 chrono_2_04.wav trim 0 4674630s gain -n -1 rate 44100 dither -s
+sox chrono_2_05_raw.wav -b 16 chrono_2_05.wav trim 0 2561524s gain -n -1 rate 44100 dither -s
+sox chrono_2_06_raw.wav -b 16 chrono_2_06.wav trim 1766677s =5412400s gain -n -1 rate 44100 dither -s
+sox chrono_2_07_raw.wav -b 16 chrono_2_07.wav trim 0 4181990s gain -n -1 rate 44100 dither -s
+sox chrono_2_08_raw.wav -b 16 chrono_2_08.wav trim 0 3293055s gain -n -1 rate 44100 dither -s
+sox chrono_2_09_raw.wav -b 16 chrono_2_09.wav trim 0 2116083s gain -n -1 rate 44100 dither -s
+sox chrono_2_10_raw.wav -b 16 chrono_2_10.wav trim 818334s =3810240s gain -n -1 rate 44100 dither -s
+sox chrono_2_12_raw.wav -b 16 chrono_2_12.wav trim 140s =274688s gain -n -1 44100 dither -s
+sox chrono_2_13_raw.wav -b 16 chrono_2_13.wav trim 1058s =2858390s gain -n -1 rate 44100 dither -s
+sox chrono_2_14_raw.wav -b 16 chrono_2_14.wav trim 1139324s =4378075s gain -n -1 rate 44100 dither -s
+sox chrono_2_15_raw.wav -b 16 chrono_2_15.wav trim 0 171770s gain -n -1 rate 44100 dither -s
+sox chrono_2_16_raw.wav -b 16 chrono_2_16.wav trim 0 3539129s gain -n -1 rate 44100 dither -s
+sox chrono_2_17_raw.wav -b 16 chrono_2_17.wav trim 0 3343923s gain -n -1 rate 44100 dither -s
+sox chrono_2_18_raw.wav -b 16 chrono_2_18.wav trim 0 4789379s gain -n -1 rate 44100 dither -s
+sox chrono_2_19_raw.wav -b 16 chrono_2_19.wav trim 0 1603260s gain -n -1 rate 44100 dither -s
+sox chrono_2_20_raw.wav -b 16 chrono_2_20.wav trim 0 2602052s gain -n -1 rate 44100 dither -s
+sox chrono_2_21_raw.wav -b 16 chrono_2_21.wav trim 0 2293167s gain -n -1 rate 44100 dither -s
+sox chrono_2_22_raw.wav -b 16 chrono_2_22.wav trim 22076s =2507809s gain -n -1 rate 44100 dither -s
+sox chrono_2_23_raw.wav -b 16 chrono_2_23.wav trim 324158s =2370186s gain -n -1 rate 44100 dither -s
+sox chrono_2_24_raw.wav -b 16 chrono_2_24.wav trim 276806s =6159082s gain -n -1 rate 44100 dither -s
 
-sox chrono_1_02_raw.wav -b 16 chrono_1_02.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-
-sox chrono_1_05_raw.wav -b 16 chrono_1_05.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_06_raw.wav -b 16 chrono_1_06.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_07_raw.wav -b 16 chrono_1_07.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_08_raw.wav -b 16 chrono_1_08.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_09_raw.wav -b 16 chrono_1_09.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_10_raw.wav -b 16 chrono_1_10.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_11_raw.wav -b 16 chrono_1_11.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_12_raw.wav -b 16 chrono_1_12.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_13_raw.wav -b 16 chrono_1_13.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_14_raw.wav -b 16 chrono_1_14.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_15_raw.wav -b 16 chrono_1_15.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_16_raw.wav -b 16 chrono_1_16.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_17_raw.wav -b 16 chrono_1_17.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_18_raw.wav -b 16 chrono_1_18.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_19_raw.wav -b 16 chrono_1_19.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_20_raw.wav -b 16 chrono_1_20.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_21_raw.wav -b 16 chrono_1_21.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_22_raw.wav -b 16 chrono_1_22.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_1_23_raw.wav -b 16 chrono_1_23.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_01_raw.wav -b 16 chrono_2_01.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_02_raw.wav -b 16 chrono_2_02.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_03_raw.wav -b 16 chrono_2_03.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_04_raw.wav -b 16 chrono_2_04.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_05_raw.wav -b 16 chrono_2_05.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_06_raw.wav -b 16 chrono_2_06.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_07_raw.wav -b 16 chrono_2_07.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_08_raw.wav -b 16 chrono_2_08.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_09_raw.wav -b 16 chrono_2_09.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_10_raw.wav -b 16 chrono_2_10.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_11_raw.wav -b 16 chrono_2_11.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_12_raw.wav -b 16 chrono_2_12.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_13_raw.wav -b 16 chrono_2_13.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_14_raw.wav -b 16 chrono_2_14.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-
-sox chrono_2_16_raw.wav -b 16 chrono_2_16.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_17_raw.wav -b 16 chrono_2_17.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_18_raw.wav -b 16 chrono_2_18.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_19_raw.wav -b 16 chrono_2_19.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_20_raw.wav -b 16 chrono_2_20.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_21_raw.wav -b 16 chrono_2_21.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_22_raw.wav -b 16 chrono_2_22.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_23_raw.wav -b 16 chrono_2_23.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_2_24_raw.wav -b 16 chrono_2_24.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
-sox chrono_3_01_raw.wav -b 16 chrono_3_01.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
+rem TODO
 sox chrono_3_02_raw.wav -b 16 chrono_3_02.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_3_03_raw.wav -b 16 chrono_3_03.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_3_04_raw.wav -b 16 chrono_3_04.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
@@ -67,3 +62,8 @@ sox chrono_3_14_raw.wav -b 16 chrono_3_14.wav gain -n -1 silence 1 .01 1% rate 4
 sox chrono_3_15_raw.wav -b 16 chrono_3_15.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_3_16_raw.wav -b 16 chrono_3_16.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 sox chrono_3_17_raw.wav -b 16 chrono_3_17.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
+
+rem Theme of Chrono Trigger
+sox chrono_1_02_raw.wav -b 16 chrono_1_02.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
+rem Battle 1
+sox chrono_1_12_raw.wav -b 16 chrono_1_12.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
