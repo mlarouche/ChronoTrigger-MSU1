@@ -16,6 +16,7 @@ copy LavosScream.wav ChronoTrigger_MSU1
 copy edit_audio.bat ChronoTrigger_MSU1
 copy decode_flac.bat ChronoTrigger_MSU1
 copy make_music_pack.bat ChronoTrigger_MSU1
+copy flac.exe ChronoTrigger_MSU1
 
 "C:\Program Files\7-Zip\7z" a -r ChronoTrigger_MSU1.zip ChronoTrigger_MSU1
 

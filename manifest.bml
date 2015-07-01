@@ -1,0 +1,77 @@
+unverified
+
+cartridge region=NTSC
+  rom name=chrono_msu1.sfc size=0x400000
+  ram name=save.ram size=0x2000
+  map id=rom address=00-3f,80-bf:8000-ffff
+  map id=rom address=40-7f,c0-ff:0000-ffff
+  map id=ram address=10-3f,90-bf:6000-7fff mask=0xe000
+
+  msu1
+    rom name=chrono_msu1.msu size=0x0000
+    map id=io address=00-3f,80-bf:2000-2007
+    track number=1 name=chrono_msu1-1.pcm
+    track number=2 name=chrono_msu1-2.pcm
+    track number=3 name=chrono_msu1-3.pcm
+    track number=4 name=chrono_msu1-4.pcm
+    track number=5 name=chrono_msu1-5.pcm
+    track number=6 name=chrono_msu1-6.pcm
+    track number=7 name=chrono_msu1-7.pcm
+    track number=8 name=chrono_msu1-8.pcm
+    track number=9 name=chrono_msu1-9.pcm
+    track number=10 name=chrono_msu1-10.pcm
+    track number=11 name=chrono_msu1-11.pcm
+    track number=12 name=chrono_msu1-12.pcm
+    track number=13 name=chrono_msu1-13.pcm
+    track number=14 name=chrono_msu1-14.pcm
+    track number=15 name=chrono_msu1-15.pcm
+    track number=16 name=chrono_msu1-16.pcm
+    track number=19 name=chrono_msu1-19.pcm
+    track number=20 name=chrono_msu1-20.pcm
+    track number=21 name=chrono_msu1-21.pcm
+    track number=22 name=chrono_msu1-22.pcm
+    track number=23 name=chrono_msu1-23.pcm
+    track number=24 name=chrono_msu1-24.pcm
+    track number=27 name=chrono_msu1-27.pcm
+    track number=28 name=chrono_msu1-28.pcm
+    track number=29 name=chrono_msu1-29.pcm
+    track number=30 name=chrono_msu1-30.pcm
+    track number=31 name=chrono_msu1-31.pcm
+    track number=35 name=chrono_msu1-35.pcm
+    track number=36 name=chrono_msu1-36.pcm
+    track number=37 name=chrono_msu1-37.pcm
+    track number=38 name=chrono_msu1-38.pcm
+    track number=39 name=chrono_msu1-39.pcm
+    track number=40 name=chrono_msu1-40.pcm
+    track number=41 name=chrono_msu1-41.pcm
+    track number=42 name=chrono_msu1-42.pcm
+    track number=43 name=chrono_msu1-43.pcm
+    track number=44 name=chrono_msu1-44.pcm
+    track number=45 name=chrono_msu1-45.pcm
+    track number=46 name=chrono_msu1-46.pcm
+    track number=47 name=chrono_msu1-47.pcm
+    track number=48 name=chrono_msu1-48.pcm
+    track number=49 name=chrono_msu1-49.pcm
+    track number=50 name=chrono_msu1-50.pcm
+    track number=51 name=chrono_msu1-51.pcm
+    track number=54 name=chrono_msu1-54.pcm
+    track number=56 name=chrono_msu1-56.pcm
+    track number=57 name=chrono_msu1-57.pcm
+    track number=59 name=chrono_msu1-59.pcm
+    track number=60 name=chrono_msu1-60.pcm
+    track number=61 name=chrono_msu1-61.pcm
+    track number=62 name=chrono_msu1-62.pcm
+    track number=63 name=chrono_msu1-63.pcm
+    track number=64 name=chrono_msu1-64.pcm
+    track number=66 name=chrono_msu1-66.pcm
+    track number=68 name=chrono_msu1-68.pcm
+    track number=70 name=chrono_msu1-70.pcm
+    track number=72 name=chrono_msu1-72.pcm
+    track number=73 name=chrono_msu1-73.pcm
+    track number=77 name=chrono_msu1-77.pcm
+    track number=78 name=chrono_msu1-78.pcm
+    track number=80 name=chrono_msu1-80.pcm
+    track number=84 name=chrono_msu1-84.pcm
+
+information
+  title: chrono_msu1
