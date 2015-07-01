@@ -10,7 +10,7 @@ wav2msu -o chrono_msu1-6.pcm chrono_1_06.wav
 wav2msu -o chrono_msu1-7.pcm chrono_3_09.wav
 wav2msu -o chrono_msu1-8.pcm chrono_1_11.wav
 wav2msu -o chrono_msu1-9.pcm -l 127755 chrono_3_05.wav
-wav2msu -o chrono_msu1-10.pcm -l 29266 chrono_2_10.wav
+wav2msu -o chrono_msu1-10.pcm chrono_2_10.wav
 wav2msu -o chrono_msu1-11.pcm -l 124341 chrono_2_19.wav
 wav2msu -o chrono_msu1-12.pcm chrono_1_13.wav
 wav2msu -o chrono_msu1-13.pcm -l 95299 chrono_2_05.wav
@@ -26,8 +26,8 @@ wav2msu -o chrono_msu1-24.pcm -l 1960601 chrono_1_02.wav
 wav2msu -o chrono_msu1-27.pcm -l 246170 chrono_1_20.wav
 wav2msu -o chrono_msu1-28.pcm chrono_2_12.wav
 wav2msu -o chrono_msu1-29.pcm -l 200740 chrono_3_03.wav
-wav2msu -o chrono_msu1-30.pcm -l 1637104 chrono_1_04.wav
-wav2msu -o chrono_msu1-31.pcm -l 195229 chrono_1_08.wav
+wav2msu -o chrono_msu1-30.pcm -l 1528251 chrono_1_04.wav
+wav2msu -o chrono_msu1-31.pcm -l 182847 chrono_1_08.wav
 wav2msu -o chrono_msu1-35.pcm -l 977200 chrono_1_22.wav
 wav2msu -o chrono_msu1-36.pcm chrono_1_16.wav
 wav2msu -o chrono_msu1-37.pcm chrono_1_14.wav
@@ -44,7 +44,7 @@ wav2msu -o chrono_msu1-47.pcm -l 263733 chrono_2_16.wav
 wav2msu -o chrono_msu1-48.pcm chrono_1_01.wav
 wav2msu -o chrono_msu1-49.pcm -l 184529 chrono_3_08.wav
 wav2msu -o chrono_msu1-50.pcm -l 239939 chrono_3_14.wav
-wav2msu -o chrono_msu1-51.pcm -l 56099 chrono_2_03.wav
+wav2msu -o chrono_msu1-51.pcm chrono_2_03.wav
 wav2msu -o chrono_msu1-54.pcm -l 175612 chrono_2_21.wav
 wav2msu -o chrono_msu1-56.pcm -l 846759 chrono_2_18.wav
 wav2msu -o chrono_msu1-57.pcm chrono_3_13.wav
