@@ -67,4 +67,4 @@ rem Theme of Chrono Trigger (Attract Mode)
 wav2msu -o chrono_msu1-84.pcm chrono_1_02_noloop.wav
 
 rem Battle 1 (enable when MSU resume is available)
-rem wav2msu -o chrono_msu1-69.pcm -l 1411702 chrono_1_12.wav
+wav2msu -o chrono_msu1-69.pcm -l 1411702 chrono_1_12.wav

@@ -6,5 +6,7 @@ copy chrono_original.sfc chrono_msu1.sfc
 
 set BASS_ARG=
 if "%~1" == "emu" set BASS_ARG=-d EMULATOR_VOLUME
+if "%~1" == "resume" set BASS_ARG=-d RESUME_EXPERIMENT
 
 bass %BASS_ARG% -o chrono_msu1.sfc chrono_msu1_music.asm
+rem bass -o chrono_msu1.sfc chrono_experiment.asm

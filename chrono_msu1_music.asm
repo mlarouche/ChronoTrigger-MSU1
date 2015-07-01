@@ -254,7 +254,7 @@ scope MSU_Main: {
 	phd
 	phb
 	
-	sep #$20 // Set all registers to 8 bit mode
+	sep #$30 // Set all registers to 8 bit mode
 	
 	CheckMSUPresence(.CallOriginalRoutine)
 	
@@ -269,7 +269,12 @@ scope MSU_Main: {
 	// Resume
 	cmp.b #$11
 	bne +
+if {defined RESUME_EXPERIMENT} {
+	jsr MSU_PlayMusic
+} else {
 	jsr MSU_ResumeMusic
+}
+	
 	bcs .CallOriginalRoutine
 	bcc .DoNotCallSPCRoutine
 +
@@ -346,13 +351,24 @@ scope MSU_PlayMusic: {
 	// Play the song
 	lda.w musicRequested
 	jsr TrackNeedLooping
+	
+if {defined RESUME_EXPERIMENT} {
+	ldx musicCommand
+	cpx #$11
+	bne .SetAudioControl
+	
+	// Add resume flag
+	ora.b #$4
+.SetAudioControl:
+}
+
 	sta MSU_AUDIO_CONTROL
 	
 	// Set volume
 	lda.b #FULL_VOLUME
 	sta.w MSU_AUDIO_VOLUME
 	sta.w fadeVolume
-	
+
 	// Only store current song if we were able to play the song
 	lda.w musicRequested
 	sta currentSong
@@ -406,6 +422,12 @@ scope MSU_ResumeMusic: {
 }
 
 scope MSU_PauseMusic: {
+if {defined RESUME_EXPERIMENT} {
+	lda.b #$4
+	sta MSU_AUDIO_CONTROL
+	
+	jml MSU_PlayMusic
+} else {
 	lda.w musicRequested
 	cmp.b #BATTLE1_MUSIC
 	beq .PauseMSUMusic
@@ -422,6 +444,8 @@ scope MSU_PauseMusic: {
 +
 	sec
 	rts
+}
+
 }
 
 scope MSU_PrepareFade: {
