@@ -260,6 +260,20 @@ $C2/CBE8 4C 16 82    JMP $8216  [$C2:8216]   A:0A0F X:FF01 Y:FFFF P:envMxdizc
 $C2/8216 E2 30       SEP #$30                A:0A0F X:FF01 Y:FFFF P:envMxdizc
 $C2/8218 A6 6E       LDX $6E    [$00:006E]   A:0A0F X:0001 Y:00FF P:envMXdizc
 
+; Setting music for attract
+c03c30 tyx                    A:01d4 X:01d4 Y:013a S:06f5 D:0100 DB:00 nvMxdizc V:256 H: 928
+c03c31 lda $7f2001,x [7f213b] A:01d4 X:013a Y:013a S:06f5 D:0100 DB:00 nvMxdizc V:256 H: 946
+c03c35 sta $7e29ae   [7e29ae] A:0118 X:013a Y:013a S:06f5 D:0100 DB:00 nvMxdizc V:256 H: 984
+c03c39 sta $1e01     [001e01] A:0118 X:013a Y:013a S:06f5 D:0100 DB:00 nvMxdizc V:256 H:1022
+
+; Music to play during attract
+7f208b = 0x3A659c = $FA659C
+7f213b = 0x1B6E03 = $DB6E03
+7f21cb = 0x3a4925 = $FA4925
+7f2206 = 0x3a4962 = $FA4962
+7f22cb = 0x3a24a4 = $FA24A4
+7f236d = 0x3a28fa = $FA28FA
+
 =====================
 = Epoch 1999 AD fix =
 =====================

@@ -37,6 +37,8 @@ constant FULL_VOLUME($FF)
 constant DUCKED_VOLUME($30)
 
 constant BATTLE1_MUSIC($45)
+constant THEME_LOOP($18)
+constant THEME_ATTRACT($54)
 
 // =============
 // = Variables =
@@ -224,6 +226,20 @@ seek($CD0D70)
 seek($CD0D81)
 	jsl MSU_Main
 	
+// Hijack for music in attract mode
+seek($DB6E03)
+	db THEME_ATTRACT
+seek($FA24A4)
+	db THEME_ATTRACT
+seek($FA28FA)
+	db THEME_ATTRACT
+seek($FA4925)
+	db THEME_ATTRACT
+seek($FA4962)
+	db THEME_ATTRACT
+seek($FA659C)
+	db THEME_ATTRACT
+
 // ============
 // = MSU Code =
 // ============
@@ -271,6 +287,18 @@ scope MSU_Main: {
 +
 // Call original routine
 .CallOriginalRoutine:
+	// Restore original theme when MSU-1 is not present
+	lda.b #$10
+	cmp.w musicCommand
+	bne Original
+	lda.b #THEME_ATTRACT
+	cmp.w musicRequested
+	bne Original
+	
+	lda.b #THEME_LOOP
+	sta.w musicRequested
+	
+Original:
 	rep #$30
 	plb
 	pld
@@ -466,6 +494,9 @@ scope MSU_PrepareFade: {
 scope TrackNeedLooping: {
 	// 1.01 A Premonition
 	cmp.b #48
+	beq .noLooping
+	// 1.02 Theme of Chrono Trigger (Attract)
+	cmp.b #THEME_ATTRACT
 	beq .noLooping
 	// 1.03 Morning Glow
 	cmp.b #15

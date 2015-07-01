@@ -22,7 +22,7 @@ wav2msu -o chrono_msu1-20.pcm -l 3970429 chrono_3_06.wav
 wav2msu -o chrono_msu1-21.pcm -l 119479 chrono_2_14.wav
 wav2msu -o chrono_msu1-22.pcm -l 1219400 chrono_1_23.wav
 wav2msu -o chrono_msu1-23.pcm chrono_1_21.wav
-wav2msu -o chrono_msu1-24.pcm chrono_1_02.wav
+wav2msu -o chrono_msu1-24.pcm -l 1960601 chrono_1_02.wav
 wav2msu -o chrono_msu1-27.pcm -l 246170 chrono_1_20.wav
 wav2msu -o chrono_msu1-28.pcm chrono_2_12.wav
 wav2msu -o chrono_msu1-29.pcm -l 200740 chrono_3_03.wav
@@ -62,6 +62,9 @@ wav2msu -o chrono_msu1-73.pcm -l 1845558 chrono_3_15.wav
 wav2msu -o chrono_msu1-77.pcm -l 4048188 chrono_3_16.wav
 wav2msu -o chrono_msu1-78.pcm -l 607174 chrono_2_17.wav
 wav2msu -o chrono_msu1-80.pcm -l 1009842 chrono_3_12.wav
+
+rem Theme of Chrono Trigger (Attract Mode)
+wav2msu -o chrono_msu1-84.pcm chrono_1_02_noloop.wav
 
 rem Battle 1 (enable when MSU resume is available)
 rem wav2msu -o chrono_msu1-69.pcm -l 1411702 chrono_1_12.wav

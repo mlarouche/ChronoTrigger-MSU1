@@ -33,7 +33,7 @@ sox chrono_2_07_raw.wav -b 16 chrono_2_07.wav trim 0 4181990s gain -n -1 rate 44
 sox chrono_2_08_raw.wav -b 16 chrono_2_08.wav trim 0 3293055s gain -n -1 rate 44100 dither -s
 sox chrono_2_09_raw.wav -b 16 chrono_2_09.wav trim 0 2116083s gain -n -1 rate 44100 dither -s
 sox chrono_2_10_raw.wav -b 16 chrono_2_10.wav trim 818334s =3810240s gain -n -1 rate 44100 dither -s
-sox chrono_2_12_raw.wav -b 16 chrono_2_12.wav trim 140s =274688s gain -n -1 44100 dither -s
+sox chrono_2_12_raw.wav -b 16 chrono_2_12.wav trim 140s =274688s gain -n -1 rate 44100 dither -s
 sox chrono_2_13_raw.wav -b 16 chrono_2_13.wav trim 1058s =2858390s gain -n -1 rate 44100 dither -s
 sox chrono_2_14_raw.wav -b 16 chrono_2_14.wav trim 1139324s =4378075s gain -n -1 rate 44100 dither -s
 sox chrono_2_15_raw.wav -b 16 chrono_2_15.wav trim 0 171770s gain -n -1 rate 44100 dither -s
@@ -67,5 +67,10 @@ sox chrono_3_15_raw.wav -b 16 chrono_3_15.wav trim 0 4936488s gain -n -1 rate 44
 sox chrono_3_16_raw.wav -b 16 chrono_3_16.wav trim 0 4519115s gain -n -1 rate 44100 dither -s
 sox chrono_3_17_raw.wav -b 16 chrono_3_17.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
 
-rem Theme of Chrono Trigger
-sox chrono_1_02_raw.wav -b 16 chrono_1_02.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
+rem Theme of Chrono Trigger (Looping version)
+sox chrono_1_02_raw.wav -b 16 chrono_1_02.wav trim 112162s =3369361s gain -n -1 rate 44100 dither -s
+rem Theme of Chrono Trigger (Attract Version)
+sox chrono_1_02_raw.wav -b 16 chrono_1_02_intro.wav trim 112162s =2072763s
+sox chrono_1_02_raw.wav -b 16 chrono_1_02_abloop.wav trim =2072763s =3369361s
+sox chrono_1_02_raw.wav -b 16 chrono_1_02_ending.wav trim 3369361s
+sox chrono_1_02_intro.wav chrono_1_02_abloop.wav chrono_1_02_abloop.wav chrono_1_02_ending.wav -b 16 chrono_1_02_noloop.wav gain -n -1 rate 44100 dither -s
