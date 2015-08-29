@@ -44,6 +44,7 @@ constant THEME_ATTRACT($54)
 // = Variables =
 // =============
 // Game Variables
+variable frameCounter($0400)
 variable musicCommand($1E00)
 variable musicRequested($1E01)
 variable targetVolume($1E02)

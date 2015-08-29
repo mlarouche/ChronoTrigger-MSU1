@@ -1,0 +1,220 @@
+..1492 mov a,$f166 A:00 X:22 Y:0c SP:01fd YA:0c00 nvpbhiZc
+..1495 beq   $14c8            A:0c X:22 Y:0c SP:01fd YA:0c0c nvpbhizc
+..1497 dec   a                A:0c X:22 Y:0c SP:01fd YA:0c0c nvpbhizc
+..1498 mov   $f166,a          A:0b X:22 Y:0c SP:01fd YA:0c0b nvpbhizc
+..149b mov   x,a              A:0b X:22 Y:0c SP:01fd YA:0c0b nvpbhizc
+..149c mov   a,$f160          A:0b X:0b Y:0c SP:01fd YA:0c0b nvpbhizc
+..149f clrc                   A:00 X:0b Y:0c SP:01fd YA:0c00 nvpbhiZc
+..14a0 adc   a,$f16c          A:00 X:0b Y:0c SP:01fd YA:0c00 nvpbhiZc
+..14a3 mov   $f160,a          A:c0 X:0b Y:0c SP:01fd YA:0cc0 Nvpbhizc
+..14a6 mov   a,$f161          A:c0 X:0b Y:0c SP:01fd YA:0cc0 Nvpbhizc
+..14a9 adc   a,$f16d          A:ff X:0b Y:0c SP:01fd YA:0cff Nvpbhizc
+..14ac cmp   a,$f161          A:e9 X:0b Y:0c SP:01fd YA:0ce9 NvpbHizC
+..14af mov   $f161,a          A:e9 X:0b Y:0c SP:01fd YA:0ce9 NvpbHizc
+..14b2 beq   $14b7            A:e9 X:0b Y:0c SP:01fd YA:0ce9 NvpbHizc
+..14b4 or    $0d0,$053        A:e9 X:0b Y:0c SP:01fd YA:0ce9 NvpbHizc
+..14b7 mov   y,a              A:e9 X:0b Y:0c SP:01fd YA:0ce9 nvpbHizc
+
+..1492 mov a,$f166 A:00 X:22 Y:0b SP:01fd YA:0b00 nvpbhiZc
+..1495 beq   $14c8            A:0b X:22 Y:0b SP:01fd YA:0b0b nvpbhizc
+..1497 dec   a                A:0b X:22 Y:0b SP:01fd YA:0b0b nvpbhizc
+..1498 mov   $f166,a          A:0a X:22 Y:0b SP:01fd YA:0b0a nvpbhizc
+..149b mov   x,a              A:0a X:22 Y:0b SP:01fd YA:0b0a nvpbhizc
+..149c mov   a,$f160          A:0a X:0a Y:0b SP:01fd YA:0b0a nvpbhizc
+..149f clrc                   A:c0 X:0a Y:0b SP:01fd YA:0bc0 Nvpbhizc
+..14a0 adc   a,$f16c          A:c0 X:0a Y:0b SP:01fd YA:0bc0 Nvpbhizc
+..14a3 mov   $f160,a          A:80 X:0a Y:0b SP:01fd YA:0b80 NvpbhizC
+..14a6 mov   a,$f161          A:80 X:0a Y:0b SP:01fd YA:0b80 NvpbhizC
+..14a9 adc   a,$f16d          A:e9 X:0a Y:0b SP:01fd YA:0be9 NvpbhizC
+..14ac cmp   a,$f161          A:d4 X:0a Y:0b SP:01fd YA:0bd4 NvpbHizC
+..14af mov   $f161,a          A:d4 X:0a Y:0b SP:01fd YA:0bd4 NvpbHizc
+..14b2 beq   $14b7            A:d4 X:0a Y:0b SP:01fd YA:0bd4 NvpbHizc
+..14b4 or    $0d0,$053        A:d4 X:0a Y:0b SP:01fd YA:0bd4 NvpbHizc
+..14b7 mov   y,a              A:d4 X:0a Y:0b SP:01fd YA:0bd4 nvpbHizc
+
+..1492 mov a,$f166 A:00 X:22 Y:0a SP:01fd YA:0a00 nvpbhiZC
+..1495 beq   $14c8            A:0a X:22 Y:0a SP:01fd YA:0a0a nvpbhizC
+..1497 dec   a                A:0a X:22 Y:0a SP:01fd YA:0a0a nvpbhizC
+..1498 mov   $f166,a          A:09 X:22 Y:0a SP:01fd YA:0a09 nvpbhizC
+..149b mov   x,a              A:09 X:22 Y:0a SP:01fd YA:0a09 nvpbhizC
+..149c mov   a,$f160          A:09 X:09 Y:0a SP:01fd YA:0a09 nvpbhizC
+..149f clrc                   A:80 X:09 Y:0a SP:01fd YA:0a80 NvpbhizC
+..14a0 adc   a,$f16c          A:80 X:09 Y:0a SP:01fd YA:0a80 Nvpbhizc
+..14a3 mov   $f160,a          A:40 X:09 Y:0a SP:01fd YA:0a40 nVpbhizC
+..14a6 mov   a,$f161          A:40 X:09 Y:0a SP:01fd YA:0a40 nVpbhizC
+..14a9 adc   a,$f16d          A:d4 X:09 Y:0a SP:01fd YA:0ad4 NVpbhizC
+..14ac cmp   a,$f161          A:bf X:09 Y:0a SP:01fd YA:0abf NvpbhizC
+..14af mov   $f161,a          A:bf X:09 Y:0a SP:01fd YA:0abf Nvpbhizc
+..14b2 beq   $14b7            A:bf X:09 Y:0a SP:01fd YA:0abf Nvpbhizc
+..14b4 or    $0d0,$053        A:bf X:09 Y:0a SP:01fd YA:0abf Nvpbhizc
+..14b7 mov   y,a              A:bf X:09 Y:0a SP:01fd YA:0abf nvpbhizc
+
+..1492 mov a,$f166 A:00 X:22 Y:09 SP:01fd YA:0900 nvpbhiZc
+..1495 beq   $14c8            A:09 X:22 Y:09 SP:01fd YA:0909 nvpbhizc
+..1497 dec   a                A:09 X:22 Y:09 SP:01fd YA:0909 nvpbhizc
+..1498 mov   $f166,a          A:08 X:22 Y:09 SP:01fd YA:0908 nvpbhizc
+..149b mov   x,a              A:08 X:22 Y:09 SP:01fd YA:0908 nvpbhizc
+..149c mov   a,$f160          A:08 X:08 Y:09 SP:01fd YA:0908 nvpbhizc
+..149f clrc                   A:40 X:08 Y:09 SP:01fd YA:0940 nvpbhizc
+..14a0 adc   a,$f16c          A:40 X:08 Y:09 SP:01fd YA:0940 nvpbhizc
+..14a3 mov   $f160,a          A:00 X:08 Y:09 SP:01fd YA:0900 nvpbhiZC
+..14a6 mov   a,$f161          A:00 X:08 Y:09 SP:01fd YA:0900 nvpbhiZC
+..14a9 adc   a,$f16d          A:bf X:08 Y:09 SP:01fd YA:09bf NvpbhizC
+..14ac cmp   a,$f161          A:aa X:08 Y:09 SP:01fd YA:09aa NvpbHizC
+..14af mov   $f161,a          A:aa X:08 Y:09 SP:01fd YA:09aa NvpbHizc
+..14b2 beq   $14b7            A:aa X:08 Y:09 SP:01fd YA:09aa NvpbHizc
+..14b4 or    $0d0,$053        A:aa X:08 Y:09 SP:01fd YA:09aa NvpbHizc
+..14b7 mov   y,a              A:aa X:08 Y:09 SP:01fd YA:09aa nvpbHizc
+
+..1492 mov a,$f166 A:00 X:22 Y:08 SP:01fd YA:0800 nvpbhiZc
+..1495 beq   $14c8            A:08 X:22 Y:08 SP:01fd YA:0808 nvpbhizc
+..1497 dec   a                A:08 X:22 Y:08 SP:01fd YA:0808 nvpbhizc
+..1498 mov   $f166,a          A:07 X:22 Y:08 SP:01fd YA:0807 nvpbhizc
+..149b mov   x,a              A:07 X:22 Y:08 SP:01fd YA:0807 nvpbhizc
+..149c mov   a,$f160          A:07 X:07 Y:08 SP:01fd YA:0807 nvpbhizc
+..149f clrc                   A:00 X:07 Y:08 SP:01fd YA:0800 nvpbhiZc
+..14a0 adc   a,$f16c          A:00 X:07 Y:08 SP:01fd YA:0800 nvpbhiZc
+..14a3 mov   $f160,a          A:c0 X:07 Y:08 SP:01fd YA:08c0 Nvpbhizc
+..14a6 mov   a,$f161          A:c0 X:07 Y:08 SP:01fd YA:08c0 Nvpbhizc
+..14a9 adc   a,$f16d          A:aa X:07 Y:08 SP:01fd YA:08aa Nvpbhizc
+..14ac cmp   a,$f161          A:94 X:07 Y:08 SP:01fd YA:0894 NvpbHizC
+..14af mov   $f161,a          A:94 X:07 Y:08 SP:01fd YA:0894 NvpbHizc
+..14b2 beq   $14b7            A:94 X:07 Y:08 SP:01fd YA:0894 NvpbHizc
+..14b4 or    $0d0,$053        A:94 X:07 Y:08 SP:01fd YA:0894 NvpbHizc
+..14b7 mov   y,a              A:94 X:07 Y:08 SP:01fd YA:0894 nvpbHizc
+
+..1492 mov a,$f166 A:00 X:22 Y:07 SP:01fd YA:0700 nvpbhiZC
+..1495 beq   $14c8            A:07 X:22 Y:07 SP:01fd YA:0707 nvpbhizC
+..1497 dec   a                A:07 X:22 Y:07 SP:01fd YA:0707 nvpbhizC
+..1498 mov   $f166,a          A:06 X:22 Y:07 SP:01fd YA:0706 nvpbhizC
+..149b mov   x,a              A:06 X:22 Y:07 SP:01fd YA:0706 nvpbhizC
+..149c mov   a,$f160          A:06 X:06 Y:07 SP:01fd YA:0706 nvpbhizC
+..149f clrc                   A:c0 X:06 Y:07 SP:01fd YA:07c0 NvpbhizC
+..14a0 adc   a,$f16c          A:c0 X:06 Y:07 SP:01fd YA:07c0 Nvpbhizc
+..14a3 mov   $f160,a          A:80 X:06 Y:07 SP:01fd YA:0780 NvpbhizC
+..14a6 mov   a,$f161          A:80 X:06 Y:07 SP:01fd YA:0780 NvpbhizC
+..14a9 adc   a,$f16d          A:94 X:06 Y:07 SP:01fd YA:0794 NvpbhizC
+..14ac cmp   a,$f161          A:7f X:06 Y:07 SP:01fd YA:077f nVpbhizC
+..14af mov   $f161,a          A:7f X:06 Y:07 SP:01fd YA:077f NVpbhizc
+..14b2 beq   $14b7            A:7f X:06 Y:07 SP:01fd YA:077f NVpbhizc
+..14b4 or    $0d0,$053        A:7f X:06 Y:07 SP:01fd YA:077f NVpbhizc
+..14b7 mov   y,a              A:7f X:06 Y:07 SP:01fd YA:077f nVpbhizc
+..14b8 bne   $14c8            A:7f X:06 Y:7f SP:01fd YA:7f7f nVpbhizc
+..14c8 mov   a,$f168          A:7f X:06 Y:7f SP:01fd YA:7f7f nVpbhizc
+
+..1492 mov a,$f166 A:00 X:22 Y:06 SP:01fd YA:0600 nvpbhiZc
+..1495 beq   $14c8            A:06 X:22 Y:06 SP:01fd YA:0606 nvpbhizc
+..1497 dec   a                A:06 X:22 Y:06 SP:01fd YA:0606 nvpbhizc
+..1498 mov   $f166,a          A:05 X:22 Y:06 SP:01fd YA:0605 nvpbhizc
+..149b mov   x,a              A:05 X:22 Y:06 SP:01fd YA:0605 nvpbhizc
+..149c mov   a,$f160          A:05 X:05 Y:06 SP:01fd YA:0605 nvpbhizc
+..149f clrc                   A:80 X:05 Y:06 SP:01fd YA:0680 Nvpbhizc
+..14a0 adc   a,$f16c          A:80 X:05 Y:06 SP:01fd YA:0680 Nvpbhizc
+..14a3 mov   $f160,a          A:40 X:05 Y:06 SP:01fd YA:0640 nVpbhizC
+..14a6 mov   a,$f161          A:40 X:05 Y:06 SP:01fd YA:0640 nVpbhizC
+..14a9 adc   a,$f16d          A:7f X:05 Y:06 SP:01fd YA:067f nVpbhizC
+..14ac cmp   a,$f161          A:6a X:05 Y:06 SP:01fd YA:066a nvpbHizC
+..14af mov   $f161,a          A:6a X:05 Y:06 SP:01fd YA:066a NvpbHizc
+..14b2 beq   $14b7            A:6a X:05 Y:06 SP:01fd YA:066a NvpbHizc
+..14b4 or    $0d0,$053        A:6a X:05 Y:06 SP:01fd YA:066a NvpbHizc
+..14b7 mov   y,a              A:6a X:05 Y:06 SP:01fd YA:066a nvpbHizc
+
+..1492 mov a,$f166 A:00 X:22 Y:05 SP:01fd YA:0500 nvpbhiZC
+..1495 beq   $14c8            A:05 X:22 Y:05 SP:01fd YA:0505 nvpbhizC
+..1497 dec   a                A:05 X:22 Y:05 SP:01fd YA:0505 nvpbhizC
+..1498 mov   $f166,a          A:04 X:22 Y:05 SP:01fd YA:0504 nvpbhizC
+..149b mov   x,a              A:04 X:22 Y:05 SP:01fd YA:0504 nvpbhizC
+..149c mov   a,$f160          A:04 X:04 Y:05 SP:01fd YA:0504 nvpbhizC
+..149f clrc                   A:40 X:04 Y:05 SP:01fd YA:0540 nvpbhizC
+..14a0 adc   a,$f16c          A:40 X:04 Y:05 SP:01fd YA:0540 nvpbhizc
+..14a3 mov   $f160,a          A:00 X:04 Y:05 SP:01fd YA:0500 nvpbhiZC
+..14a6 mov   a,$f161          A:00 X:04 Y:05 SP:01fd YA:0500 nvpbhiZC
+..14a9 adc   a,$f16d          A:6a X:04 Y:05 SP:01fd YA:056a nvpbhizC
+..14ac cmp   a,$f161          A:55 X:04 Y:05 SP:01fd YA:0555 nvpbHizC
+..14af mov   $f161,a          A:55 X:04 Y:05 SP:01fd YA:0555 NvpbHizc
+..14b2 beq   $14b7            A:55 X:04 Y:05 SP:01fd YA:0555 NvpbHizc
+..14b4 or    $0d0,$053        A:55 X:04 Y:05 SP:01fd YA:0555 NvpbHizc
+..14b7 mov   y,a              A:55 X:04 Y:05 SP:01fd YA:0555 nvpbHizc
+
+..1492 mov a,$f166 A:00 X:22 Y:04 SP:01fd YA:0400 nvpbhiZC
+..1495 beq   $14c8            A:04 X:22 Y:04 SP:01fd YA:0404 nvpbhizC
+..1497 dec   a                A:04 X:22 Y:04 SP:01fd YA:0404 nvpbhizC
+..1498 mov   $f166,a          A:03 X:22 Y:04 SP:01fd YA:0403 nvpbhizC
+..149b mov   x,a              A:03 X:22 Y:04 SP:01fd YA:0403 nvpbhizC
+..149c mov   a,$f160          A:03 X:03 Y:04 SP:01fd YA:0403 nvpbhizC
+..149f clrc                   A:00 X:03 Y:04 SP:01fd YA:0400 nvpbhiZC
+..14a0 adc   a,$f16c          A:00 X:03 Y:04 SP:01fd YA:0400 nvpbhiZc
+..14a3 mov   $f160,a          A:c0 X:03 Y:04 SP:01fd YA:04c0 Nvpbhizc
+..14a6 mov   a,$f161          A:c0 X:03 Y:04 SP:01fd YA:04c0 Nvpbhizc
+..14a9 adc   a,$f16d          A:55 X:03 Y:04 SP:01fd YA:0455 nvpbhizc
+..14ac cmp   a,$f161          A:3f X:03 Y:04 SP:01fd YA:043f nvpbhizC
+..14af mov   $f161,a          A:3f X:03 Y:04 SP:01fd YA:043f Nvpbhizc
+..14b2 beq   $14b7            A:3f X:03 Y:04 SP:01fd YA:043f Nvpbhizc
+..14b4 or    $0d0,$053        A:3f X:03 Y:04 SP:01fd YA:043f Nvpbhizc
+..14b7 mov   y,a              A:3f X:03 Y:04 SP:01fd YA:043f nvpbhizc
+
+..1492 mov a,$f166 A:00 X:22 Y:03 SP:01fd YA:0300 nvpbhiZc
+..1495 beq   $14c8            A:03 X:22 Y:03 SP:01fd YA:0303 nvpbhizc
+..1497 dec   a                A:03 X:22 Y:03 SP:01fd YA:0303 nvpbhizc
+..1498 mov   $f166,a          A:02 X:22 Y:03 SP:01fd YA:0302 nvpbhizc
+..149b mov   x,a              A:02 X:22 Y:03 SP:01fd YA:0302 nvpbhizc
+..149c mov   a,$f160          A:02 X:02 Y:03 SP:01fd YA:0302 nvpbhizc
+..149f clrc                   A:c0 X:02 Y:03 SP:01fd YA:03c0 Nvpbhizc
+..14a0 adc   a,$f16c          A:c0 X:02 Y:03 SP:01fd YA:03c0 Nvpbhizc
+..14a3 mov   $f160,a          A:80 X:02 Y:03 SP:01fd YA:0380 NvpbhizC
+..14a6 mov   a,$f161          A:80 X:02 Y:03 SP:01fd YA:0380 NvpbhizC
+..14a9 adc   a,$f16d          A:3f X:02 Y:03 SP:01fd YA:033f nvpbhizC
+..14ac cmp   a,$f161          A:2a X:02 Y:03 SP:01fd YA:032a nvpbHizC
+..14af mov   $f161,a          A:2a X:02 Y:03 SP:01fd YA:032a NvpbHizc
+..14b2 beq   $14b7            A:2a X:02 Y:03 SP:01fd YA:032a NvpbHizc
+..14b4 or    $0d0,$053        A:2a X:02 Y:03 SP:01fd YA:032a NvpbHizc
+..14b7 mov   y,a              A:2a X:02 Y:03 SP:01fd YA:032a nvpbHizc
+
+..1492 mov a,$f166 A:00 X:22 Y:02 SP:01fd YA:0200 nvpbhiZC
+..1495 beq   $14c8            A:02 X:22 Y:02 SP:01fd YA:0202 nvpbhizC
+..1497 dec   a                A:02 X:22 Y:02 SP:01fd YA:0202 nvpbhizC
+..1498 mov   $f166,a          A:01 X:22 Y:02 SP:01fd YA:0201 nvpbhizC
+..149b mov   x,a              A:01 X:22 Y:02 SP:01fd YA:0201 nvpbhizC
+..149c mov   a,$f160          A:01 X:01 Y:02 SP:01fd YA:0201 nvpbhizC
+..149f clrc                   A:80 X:01 Y:02 SP:01fd YA:0280 NvpbhizC
+..14a0 adc   a,$f16c          A:80 X:01 Y:02 SP:01fd YA:0280 Nvpbhizc
+..14a3 mov   $f160,a          A:40 X:01 Y:02 SP:01fd YA:0240 nVpbhizC
+..14a6 mov   a,$f161          A:40 X:01 Y:02 SP:01fd YA:0240 nVpbhizC
+..14a9 adc   a,$f16d          A:2a X:01 Y:02 SP:01fd YA:022a nVpbhizC
+..14ac cmp   a,$f161          A:15 X:01 Y:02 SP:01fd YA:0215 nvpbHizC
+..14af mov   $f161,a          A:15 X:01 Y:02 SP:01fd YA:0215 NvpbHizc
+..14b2 beq   $14b7            A:15 X:01 Y:02 SP:01fd YA:0215 NvpbHizc
+..14b4 or    $0d0,$053        A:15 X:01 Y:02 SP:01fd YA:0215 NvpbHizc
+..14b7 mov   y,a              A:15 X:01 Y:02 SP:01fd YA:0215 nvpbHizc
+..14b8 bne   $14c8            A:15 X:01 Y:15 SP:01fd YA:1515 nvpbHizc
+
+..1492 mov a,$f166 A:00 X:22 Y:01 SP:01fd YA:0100 nvpbhiZc
+..1495 beq   $14c8            A:01 X:22 Y:01 SP:01fd YA:0101 nvpbhizc
+..1497 dec   a                A:01 X:22 Y:01 SP:01fd YA:0101 nvpbhizc
+..1498 mov   $f166,a          A:00 X:22 Y:01 SP:01fd YA:0100 nvpbhiZc
+..149b mov   x,a              A:00 X:22 Y:01 SP:01fd YA:0100 nvpbhiZc
+..149c mov   a,$f160          A:00 X:00 Y:01 SP:01fd YA:0100 nvpbhiZc
+..149f clrc                   A:40 X:00 Y:01 SP:01fd YA:0140 nvpbhizc
+..14a0 adc   a,$f16c          A:40 X:00 Y:01 SP:01fd YA:0140 nvpbhizc
+..14a3 mov   $f160,a          A:00 X:00 Y:01 SP:01fd YA:0100 nvpbhiZC
+..14a6 mov   a,$f161          A:00 X:00 Y:01 SP:01fd YA:0100 nvpbhiZC
+..14a9 adc   a,$f16d          A:15 X:00 Y:01 SP:01fd YA:0115 nvpbhizC
+..14ac cmp   a,$f161          A:00 X:00 Y:01 SP:01fd YA:0100 nvpbHiZC
+..14af mov   $f161,a          A:00 X:00 Y:01 SP:01fd YA:0100 NvpbHizc
+..14b2 beq   $14b7            A:00 X:00 Y:01 SP:01fd YA:0100 NvpbHizc
+..14b4 or    $0d0,$053        A:00 X:00 Y:01 SP:01fd YA:0100 NvpbHizc
+..14b7 mov   y,a              A:00 X:00 Y:01 SP:01fd YA:0100 nvpbHizc
+..14b8 bne   $14c8            A:00 X:00 Y:00 SP:01fd YA:0000 nvpbHiZc
+..14ba mov   a,x              A:00 X:00 Y:00 SP:01fd YA:0000 nvpbHiZc
+
+..1492 mov a,$f166 A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..1495 beq   $14c8            A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..14c8 mov   a,$f168          A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..14cb beq   $14f6            A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..14f6 mov   a,$f16a          A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..14f9 beq   $1524            A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..1524 mov   a,$0ad           A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..1526 beq   $1530            A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..1530 mov   a,$0b4           A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..1532 beq   $1543            A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC
+..1543 ret                    A:00 X:22 Y:00 SP:01fd YA:0000 nvpbhiZC

@@ -78,7 +78,7 @@ $1E00 = Command to do
 	$14 = Pause music
 	$18 = Play a sample
 	$19 = Play a battle SFX ?
-	$81 = ?
+	$81 = Fade
 	$82 = ?
 	$83 = ?
 	$F3 = Set Stereo (0 = Stereo, 1 = Mono)
@@ -328,6 +328,269 @@ $C3/0C3C C2 20       REP #$20                A:0000 X:000A Y:00B8 P:eNvMxdIzc
 $C3/0C3E C6 20       DEC $20    [$00:0B20]   A:0000 X:000A Y:00B8 P:eNvmxdIzc
 $C3/0C40 60          RTS                     A:0000 X:000A Y:00B8 P:envmxdIzc
 
+=================
+= Fade Research =
+=================
+c7061c sep #$20               A:1981 X:1e00 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 17 H:  22
+c7061e lda $03       [001e03] A:1981 X:1e00 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 17 H:  46
+c70620 sta $2143     [002143] A:19ff X:1e00 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 17 H:  72
+c70623 lda $02       [001e02] A:19ff X:1e00 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 17 H: 102
+c70625 sta $2142     [002142] A:19ff X:1e00 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 17 H: 128
+c70628 lda $01       [001e01] A:19ff X:1e00 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 17 H: 158
+c7062a sta $2141     [002141] A:1900 X:1e00 Y:0200 S:06ee D:1e00 DB:00 nvMxdIZc V: 17 H: 184
+c7062d lda $00       [001e00] A:0000 X:1e00 Y:12b0 S:06f2 D:1e00 DB:00 nvMxdIZc V:151 H:1220
+c7062f ldx #$0400             A:1981 X:1e00 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 17 H: 240
+c70632 sta $2140     [002140] A:1981 X:0400 Y:0200 S:06ee D:1e00 DB:00 nvMxdIzc V: 17 H: 264
+c70635 cmp $2140     [002140] A:1981 X:0400 Y:0200 S:06ee D:1e00 DB:00 nvMxdIzc V: 17 H: 294
+c70638 beq $0643     [c70643] A:1981 X:0400 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 17 H: 324
+c7063a dex                    A:1981 X:0400 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 17 H: 342
+c7063b bne $0635     [c70635] A:1981 X:03ff Y:0200 S:06ee D:1e00 DB:00 nvMxdIzc V: 17 H: 360
+
+..0299 call  $0b96            A:16 X:00 Y:00 SP:01ff YA:0016 nvpbhiZc
+..029c mov   y,$0fd           A:00 X:00 Y:ea SP:01ff YA:ea00 nvpbhiZc
+..02ef call  $0377            A:00 X:0b Y:e9 SP:01ff YA:e900 nvpbHiZc
+
+..0317 bra   $031c            A:00 X:00 Y:01 SP:01ff YA:0100 nvpbhiZc
+..031c call  $0892            A:00 X:00 Y:01 SP:01ff YA:0100 nvpbhiZc
+
+..03a3 mov   $0a6,x           A:0c X:08 Y:81 SP:01fd YA:810c nvpbhizC
+..03a5 dec   $026+x           A:0c X:08 Y:81 SP:01fd YA:810c nvpbhizC
+..03a7 bne   $03b3            A:0c X:08 Y:81 SP:01fd YA:810c nvpbhizC
+
+..03e0 call  $0892            A:00 X:06 Y:00 SP:01fd YA:0000 nvpbhiZc
+..03e3 inc   x                A:0c X:06 Y:81 SP:01fd YA:810c Nvpbhizc
+..03e4 inc   x                A:0c X:07 Y:81 SP:01fd YA:810c nvpbhizc
+..03e5 asl   $091             A:0c X:08 Y:81 SP:01fd YA:810c nvpbhizc
+..03e7 lsr   $0a3             A:0c X:08 Y:81 SP:01fd YA:810c nvpbhizc
+..03e9 bcs   $03a3            A:0c X:08 Y:81 SP:01fd YA:810c nvpbhizC
+
+..07a8 mov   $0f1,#$13        A:0c X:06 Y:81 SP:01f9 YA:810c Nvpbhizc ; Activate all timers & Clear Port 0 and 1
+..07ab mov   $0f1,#$03        A:0c X:06 Y:81 SP:01f9 YA:810c Nvpbhizc ; 
+..07ae ret                    A:0c X:06 Y:81 SP:01f9 YA:810c Nvpbhizc
+
+..07bd mov   a,$f2c0+x        A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..07c0 beq   $07e1            A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..07e4 beq   $0805            A:00 X:0e Y:00 SP:01fb YA:0000 nvpbHiZc
+..0805 mov   a,$f4e0+x        A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..0808 mov   $09b,a           A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..080a mov   a,$f3c0+x        A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..080d mov   $09c,a           A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..080f mov   a,$f3c1+x        A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..0812 mov   $09d,a           A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..0814 movw  ya,$09b          A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..0816 bne   $081c            A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..0818 mov   a,$09d           A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..081a beq   $084a            A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..084a mov   a,$0171+x        A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..084d beq   $0891            A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..0891 ret                    A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+
+SNESCommunication:
+..0892 mov   a,$0f4           A:00 X:06 Y:00 SP:01fb YA:0000 nvpbhiZc
+..0894 beq   $08cc            A:81 X:06 Y:00 SP:01fb YA:0081 Nvpbhizc
+..0896 cmp   a,$0f4           A:81 X:06 Y:00 SP:01fb YA:0081 Nvpbhizc
+..0898 bne   $0892            A:81 X:06 Y:00 SP:01fb YA:0081 nvpbhiZC
+..089a cmp   a,#$fe           A:81 X:06 Y:00 SP:01fb YA:0081 nvpbhiZC
+..089c beq   $08cc            A:81 X:06 Y:00 SP:01fb YA:0081 Nvpbhizc
+..089e cmp   a,#$10           A:81 X:06 Y:00 SP:01fb YA:0081 Nvpbhizc
+..08a0 bcc   $08a6            A:81 X:06 Y:00 SP:01fb YA:0081 nvpbhizC
+..08a2 cmp   a,#$18           A:81 X:06 Y:00 SP:01fb YA:0081 nvpbhizC
+..08a4 bcc   $08cc            A:81 X:06 Y:00 SP:01fb YA:0081 nvpbhizC
+..08a6 push  x                A:81 X:06 Y:00 SP:01fb YA:0081 nvpbhizC
+..08a7 mov   x,$0d7           A:81 X:06 Y:00 SP:01fa YA:0081 nvpbhizC
+..08a9 mov   $f172+x,a        A:81 X:08 Y:00 SP:01fa YA:0081 nvpbhizC
+..08ac mov   y,a              A:81 X:08 Y:00 SP:01fa YA:0081 nvpbhizC
+..08ad mov   a,$0f5           A:81 X:08 Y:81 SP:01fa YA:8181 NvpbhizC
+..08af mov   $f173+x,a        A:00 X:08 Y:81 SP:01fa YA:8100 nvpbhiZC
+..08b2 mov   a,$0f6           A:00 X:08 Y:81 SP:01fa YA:8100 nvpbhiZC
+..08b4 mov   $f174+x,a        A:ff X:08 Y:81 SP:01fa YA:81ff NvpbhizC
+..08b7 mov   a,$0f7           A:ff X:08 Y:81 SP:01fa YA:81ff NvpbhizC
+..08b9 mov   $f175+x,a        A:ff X:08 Y:81 SP:01fa YA:81ff NvpbhizC
+..08bc mov   a,x              A:ff X:08 Y:81 SP:01fa YA:81ff NvpbhizC
+..08bd clrc                   A:08 X:08 Y:81 SP:01fa YA:8108 nvpbhizC
+..08be adc   a,#$04           A:08 X:08 Y:81 SP:01fa YA:8108 nvpbhizc
+..08c0 cmp   a,#$40           A:0c X:08 Y:81 SP:01fa YA:810c nvpbhizc
+..08c2 bcs   $08c6            A:0c X:08 Y:81 SP:01fa YA:810c Nvpbhizc
+..08c4 mov   $0d7,a           A:0c X:08 Y:81 SP:01fa YA:810c Nvpbhizc
+..08c6 pop   x                A:0c X:08 Y:81 SP:01fa YA:810c Nvpbhizc
+..08c7 call  $07a8            A:0c X:06 Y:81 SP:01fb YA:810c Nvpbhizc
+..08ca mov   $0f4,y           A:0c X:06 Y:81 SP:01fb YA:810c Nvpbhizc
+..08cc ret                    A:0c X:06 Y:81 SP:01fb YA:810c Nvpbhizc
+
+..08d4 mov   $08d,a           A:81 X:00 Y:00 SP:01fd YA:0081 Nvpbhizc
+..08d6 mov   a,$f173+x        A:81 X:00 Y:00 SP:01fd YA:0081 Nvpbhizc
+..08d9 mov   $08e,a           A:00 X:00 Y:00 SP:01fd YA:0000 nvpbhiZc
+..08db mov   a,$f174+x        A:00 X:00 Y:00 SP:01fd YA:0000 nvpbhiZc
+..08de mov   $08f,a           A:ff X:00 Y:00 SP:01fd YA:00ff Nvpbhizc
+..08e0 mov   a,$f175+x        A:ff X:00 Y:00 SP:01fd YA:00ff Nvpbhizc
+..08e3 mov   $090,a           A:ff X:00 Y:00 SP:01fd YA:00ff Nvpbhizc
+..08e5 push  x                A:ff X:00 Y:00 SP:01fd YA:00ff Nvpbhizc
+..08e6 call  $0bac            A:ff X:00 Y:00 SP:01fc YA:00ff Nvpbhizc
+..08e9 pop   a                A:ff X:00 Y:ff SP:01fc YA:ffff Nvpbhizc
+..08ea clrc                   A:00 X:00 Y:ff SP:01fd YA:ff00 Nvpbhizc
+..08eb adc   a,#$04           A:00 X:00 Y:ff SP:01fd YA:ff00 Nvpbhizc
+..08ed mov   x,a              A:04 X:00 Y:ff SP:01fd YA:ff04 nvpbhizc
+..08ee cmp   x,#$40           A:04 X:04 Y:ff SP:01fd YA:ff04 nvpbhizc
+..08f0 bne   $08cf            A:04 X:04 Y:ff SP:01fd YA:ff04 Nvpbhizc
+..08cf mov   a,$f172+x        A:04 X:04 Y:ff SP:01fd YA:ff04 Nvpbhizc
+..08d2 beq   $08f2            A:00 X:04 Y:ff SP:01fd YA:ff00 nvpbhiZc
+
+..08f2 mov   a,x              A:00 X:04 Y:ff SP:01fd YA:ff00 nvpbhiZc
+..08f3 beq   $0900            A:04 X:04 Y:ff SP:01fd YA:ff04 nvpbhizc
+..08f5 mov   a,#$00           A:04 X:04 Y:ff SP:01fd YA:ff04 nvpbhizc
+..08f7 mov   $f16e+x,a        A:00 X:04 Y:ff SP:01fd YA:ff00 nvpbhiZc
+
+; Called when setting Channel Volume
+..0a53 mul   ya               A:80 X:00 Y:2c SP:01fd YA:2c80 nvpbhizc
+..0a54 mov   a,y              A:00 X:00 Y:16 SP:01fd YA:1600 nvpbhizc
+..0a55 mov   y,$09b           A:16 X:00 Y:16 SP:01fd YA:1616 nvpbhizc
+..0a57 mov   $00be+y,a        A:16 X:00 Y:01 SP:01fd YA:0116 nvpbhizc
+..0a5a mov   y,$09c           A:16 X:00 Y:01 SP:01fd YA:0116 nvpbhizc
+..0a5c mov   $0f2,y           A:20 X:00 Y:00 SP:01fd YA:0020 nvpbhiZc
+..0a5e mov   $0f3,a           A:20 X:00 Y:00 SP:01fd YA:0020 nvpbhiZc
+..0a60 not1  c,$009b:0        A:15 X:00 Y:00 SP:01fd YA:0015 nvpbhiZc
+..0a63 inc   $09c             A:15 X:00 Y:00 SP:01fd YA:0015 nvpbhiZc
+..0a65 bbs1  $09c,$0a70       A:15 X:00 Y:00 SP:01fd YA:0015 nvpbhizc
+..0a68 mov   a,$09d           A:15 X:00 Y:00 SP:01fd YA:0015 nvpbhizc
+..0a6a eor   a,#$ff           A:7f X:00 Y:00 SP:01fd YA:007f nvpbhizc
+..0a6c mov   y,$09e           A:80 X:00 Y:00 SP:01fd YA:0080 Nvpbhizc
+..0a6e bra   $0a53            A:80 X:00 Y:2c SP:01fd YA:2c80 nvpbhizc
+..0a70 mov   a,$091           A:16 X:00 Y:01 SP:01fd YA:0116 nvpbhizc
+..0a72 and   a,$0d1           A:01 X:00 Y:01 SP:01fd YA:0101 nvpbhizc
+..0a74 beq   $0add            A:00 X:00 Y:01 SP:01fd YA:0100 nvpbhiZc
+..0add ret                    A:00 X:00 Y:01 SP:01fd YA:0100 nvpbhiZc
+
+; When Command $81 is read in the SPC700
+..0b96 mov   x,$0f4           A:16 X:00 Y:00 SP:01fd YA:0016 nvpbhiZc
+..0b98 bne   $0b9d            A:16 X:81 Y:00 SP:01fd YA:0016 Nvpbhizc
+..0b9d cmp   x,$0f4           A:16 X:81 Y:00 SP:01fd YA:0016 Nvpbhizc
+..0b9f bne   $0b9b            A:16 X:81 Y:00 SP:01fd YA:0016 nvpbhiZC
+..0ba1 movw  ya,$0f6          A:16 X:81 Y:00 SP:01fd YA:0016 nvpbhiZC ; Reading $2142-2143 from SNES
+..0ba3 movw  $08f,ya          A:00 X:81 Y:ff SP:01fd YA:ff00 NvpbhizC
+..0ba5 movw  ya,$0f4          A:00 X:81 Y:ff SP:01fd YA:ff00 NvpbhizC ; Reading $2140-2131 from SNES
+..0ba7 movw  $08d,ya          A:81 X:81 Y:0c SP:01fd YA:0c81 nvpbhizC
+..0ba9 call  $07a8            A:81 X:81 Y:0c SP:01fd YA:0c81 nvpbhizC ; Start the timers
+..0bac mov   x,$08d           A:10 X:10 Y:01 SP:01fd YA:0110 nvpbhizC
+..0bae mov   a,x              A:10 X:10 Y:01 SP:01fd YA:0110 nvpbhizC
+..0baf bpl   $0bb6            A:10 X:10 Y:01 SP:01fd YA:0110 nvpbhizC
+..0bb1 mov   $0f4,x           A:81 X:81 Y:00 SP:01fa YA:0081 Nvpbhizc ; Ping-back the SNES that we acknowledge the command
+..0bb3 jmp   $0dfb            A:81 X:81 Y:00 SP:01fa YA:0081 Nvpbhizc
+..0bb6 cmp   x,#$10           A:10 X:10 Y:01 SP:01fd YA:0110 nvpbhizC
+..0bb8 bcc   $0bd5            A:10 X:10 Y:01 SP:01fd YA:0110 nvpbhiZC
+..0bba cmp   x,#$20           A:10 X:10 Y:01 SP:01fd YA:0110 nvpbhiZC
+..0bbc bcs   $0bd5            A:10 X:10 Y:01 SP:01fd YA:0110 Nvpbhizc
+..0bbe and   a,#$0f           A:10 X:10 Y:01 SP:01fd YA:0110 Nvpbhizc
+..0bc0 asl   a                A:00 X:10 Y:01 SP:01fd YA:0100 nvpbhiZc
+..0bc1 mov   y,a              A:00 X:10 Y:01 SP:01fd YA:0100 nvpbhiZc
+..0bc2 mov   a,$1681+y        A:00 X:10 Y:00 SP:01fd YA:0000 nvpbhiZc
+..0bc5 push  a                A:0b X:10 Y:00 SP:01fd YA:000b nvpbhizc
+..0bc6 mov   a,$1680+y        A:0b X:10 Y:00 SP:01fc YA:000b nvpbhizc
+..0bc9 push  a                A:db X:10 Y:00 SP:01fc YA:00db Nvpbhizc
+..0bca mov   a,$16a1+y        A:db X:10 Y:00 SP:01fb YA:00db Nvpbhizc
+..0bcd beq   $0bd4            A:0d X:10 Y:00 SP:01fb YA:000d nvpbhizc
+..0bcf push  a                A:0d X:10 Y:00 SP:01fb YA:000d nvpbhizc
+..0bd0 mov   a,$16a0+y        A:0d X:10 Y:00 SP:01fa YA:000d nvpbhizc
+..0bd3 push  a                A:29 X:10 Y:00 SP:01fa YA:0029 nvpbhizc
+..0bd4 ret                    A:29 X:10 Y:00 SP:01f9 YA:0029 nvpbhizc
+
+; Handle special commands and call the right routine
+..0dfb cmp   x,#$f0           A:81 X:81 Y:00 SP:01fa YA:0081 Nvpbhizc
+..0dfd bcs   $0e03            A:81 X:81 Y:00 SP:01fa YA:0081 Nvpbhizc
+..0dff cmp   x,#$90           A:81 X:81 Y:00 SP:01fa YA:0081 Nvpbhizc
+..0e01 bcs   $0e10            A:81 X:81 Y:00 SP:01fa YA:0081 Nvpbhizc
+..0e03 mov   a,x              A:81 X:81 Y:00 SP:01fa YA:0081 Nvpbhizc
+..0e04 and   a,#$1f           A:81 X:81 Y:00 SP:01fa YA:0081 Nvpbhizc
+..0e06 asl   a                A:01 X:81 Y:00 SP:01fa YA:0001 nvpbhizc
+..0e07 mov   y,a              A:02 X:81 Y:00 SP:01fa YA:0002 nvpbhizc
+..0e08 mov   a,$16c1+y        A:02 X:81 Y:02 SP:01fa YA:0202 nvpbhizc
+..0e0b push  a                A:0e X:81 Y:02 SP:01fa YA:020e nvpbhizc
+..0e0c mov   a,$16c0+y        A:0e X:81 Y:02 SP:01f9 YA:020e nvpbhizc
+..0e0f push  a                A:1a X:81 Y:02 SP:01f9 YA:021a nvpbhizc
+..0e10 ret                    A:1a X:81 Y:02 SP:01f8 YA:021a nvpbhizc
+
+; $81 Command
+..0e1a or    $0d0,#$7f        A:1a X:81 Y:02 SP:01fa YA:021a nvpbhizc
+..0e1d mov   x,#$00           A:1a X:81 Y:02 SP:01fa YA:021a nvpbhizc
+..0e1f jmp   $0e2f            A:1a X:00 Y:02 SP:01fa YA:021a nvpbhiZc
+
+; A = timing, Y = volume target
+..0e2f mov   y,$08f           A:1a X:00 Y:02 SP:01fa YA:021a nvpbhiZc
+..0e31 mov   a,$08e           A:1a X:00 Y:ff SP:01fa YA:ff1a Nvpbhizc
+..0e33 mov   $f166+x,a        A:00 X:00 Y:ff SP:01fa YA:ff00 nvpbhiZc
+..0e36 bne   $0e46            A:00 X:00 Y:ff SP:01fa YA:ff00 nvpbhiZc
+..0e38 mov   $f160+x,a        A:00 X:00 Y:ff SP:01fa YA:ff00 nvpbhiZc
+..0e3b mov   $f16c+x,a        A:00 X:00 Y:ff SP:01fa YA:ff00 nvpbhiZc
+..0e3e mov   $f16d+x,a        A:00 X:00 Y:ff SP:01fa YA:ff00 nvpbhiZc
+..0e41 mov   a,y              A:00 X:00 Y:ff SP:01fa YA:ff00 nvpbhiZc
+..0e42 mov   $f161+x,a        A:ff X:00 Y:ff SP:01fa YA:ffff Nvpbhizc
+..0e45 ret                    A:ff X:00 Y:ff SP:01fa YA:ffff Nvpbhizc
+..0e46 mov   a,y              A:0c X:00 Y:00 SP:01fd YA:000c nvpbhizc
+..0e47 setc                   A:00 X:00 Y:00 SP:01fd YA:0000 nvpbhiZc
+..0e48 sbc   a,$f161+x        A:00 X:00 Y:00 SP:01fd YA:0000 nvpbhiZC
+..0e4b beq   $0e33            A:01 X:00 Y:00 SP:01fd YA:0001 nvpbhizc
+..0e4d push  x                A:01 X:00 Y:00 SP:01fd YA:0001 nvpbhizc
+..0e4e call  $0e5f            A:01 X:00 Y:00 SP:01fc YA:0001 nvpbhizc
+..0e51 pop   x                A:c0 X:0c Y:ea SP:01fc YA:eac0 Nvpbhizc
+..0e52 mov   $f16c+x,a        A:c0 X:00 Y:ea SP:01fd YA:eac0 Nvpbhizc
+..0e55 mov   a,y              A:c0 X:00 Y:ea SP:01fd YA:eac0 Nvpbhizc
+..0e56 mov   $f16d+x,a        A:ea X:00 Y:ea SP:01fd YA:eaea Nvpbhizc
+..0e59 mov   a,#$00           A:ea X:00 Y:ea SP:01fd YA:eaea Nvpbhizc
+..0e5b mov   $f160+x,a        A:00 X:00 Y:ea SP:01fd YA:ea00 nvpbhiZc
+..0e5e ret                    A:00 X:00 Y:ea SP:01fd YA:ea00 nvpbhiZc
+
+; Fade step calculation ?
+..0e5f push  p                A:01 X:00 Y:00 SP:01fa YA:0001 nvpbhizc
+..0e60 bcs   $0e65            A:01 X:00 Y:00 SP:01f9 YA:0001 nvpbhizc
+..0e62 eor   a,#$ff           A:01 X:00 Y:00 SP:01f9 YA:0001 nvpbhizc
+..0e64 inc   a                A:fe X:00 Y:00 SP:01f9 YA:00fe Nvpbhizc
+..0e65 mov   x,$08e           A:ff X:00 Y:00 SP:01f9 YA:00ff Nvpbhizc
+..0e67 mov   y,#$00           A:ff X:0c Y:00 SP:01f9 YA:00ff nvpbhizc
+..0e69 div   ya,x             A:ff X:0c Y:00 SP:01f9 YA:00ff nvpbhiZc
+..0e6a mov   $0b6,a           A:15 X:0c Y:03 SP:01f9 YA:0315 nvpbhizc
+..0e6c mov   a,#$00           A:15 X:0c Y:03 SP:01f9 YA:0315 nvpbhizc
+..0e6e div   ya,x             A:00 X:0c Y:03 SP:01f9 YA:0300 nvpbhiZc
+..0e6f mov   $0b5,a           A:40 X:0c Y:00 SP:01f9 YA:0040 nvpbhizc
+..0e71 pop   p                A:40 X:0c Y:00 SP:01f9 YA:0040 nvpbhizc
+..0e72 bcs   $0e7c            A:40 X:0c Y:00 SP:01fa YA:0040 nvpbhizc
+..0e74 eor   $0b5,#$ff        A:40 X:0c Y:00 SP:01fa YA:0040 nvpbhizc
+..0e77 eor   $0b6,#$ff        A:40 X:0c Y:00 SP:01fa YA:0040 Nvpbhizc
+..0e7a incw  $0b5             A:40 X:0c Y:00 SP:01fa YA:0040 Nvpbhizc
+..0e7c movw  ya,$0b5          A:40 X:0c Y:00 SP:01fa YA:0040 Nvpbhizc
+..0e7e ret                    A:c0 X:0c Y:ea SP:01fa YA:eac0 Nvpbhizc
+
+; Fade is applied
+..1492 mov   a,$f166          A:00 X:22 Y:0b SP:01fd YA:0b00 nvpbhiZC
+..1495 beq   $14c8            A:0b X:22 Y:0b SP:01fd YA:0b0b nvpbhizC
+..1497 dec   a                A:0b X:22 Y:0b SP:01fd YA:0b0b nvpbhizC
+..1498 mov   $f166,a          A:0a X:22 Y:0b SP:01fd YA:0b0a nvpbhizC
+..149b mov   x,a              A:0a X:22 Y:0b SP:01fd YA:0b0a nvpbhizC
+..149c mov   a,$f160          A:0a X:0a Y:0b SP:01fd YA:0b0a nvpbhizC
+..149f clrc                   A:c0 X:0a Y:0b SP:01fd YA:0bc0 NvpbhizC
+..14a0 adc   a,$f16c          A:c0 X:0a Y:0b SP:01fd YA:0bc0 Nvpbhizc
+..14a3 mov   $f160,a          A:80 X:0a Y:0b SP:01fd YA:0b80 NvpbhizC
+..14a6 mov   a,$f161          A:80 X:0a Y:0b SP:01fd YA:0b80 NvpbhizC
+..14a9 adc   a,$f16d          A:e9 X:0a Y:0b SP:01fd YA:0be9 NvpbhizC
+..14ac cmp   a,$f161          A:d4 X:0a Y:0b SP:01fd YA:0bd4 NvpbHizC
+..14af mov   $f161,a          A:d4 X:0a Y:0b SP:01fd YA:0bd4 NvpbHizc
+..14b2 beq   $14b7            A:d4 X:0a Y:0b SP:01fd YA:0bd4 NvpbHizc
+..14b4 or    $0d0,$053        A:d4 X:0a Y:0b SP:01fd YA:0bd4 NvpbHizc
+..14b7 mov   y,a              A:d4 X:0a Y:0b SP:01fd YA:0bd4 nvpbHizc
+..14b8 bne   $14c8            A:d4 X:0a Y:d4 SP:01fd YA:d4d4 NvpbHizc
+
+..14c8 mov   a,$f168          A:e9 X:0b Y:e9 SP:01fd YA:e9e9 NvpbHizc
+..14cb beq   $14f6            A:00 X:0b Y:e9 SP:01fd YA:e900 nvpbHiZc
+
+..14f6 mov   a,$f16a          A:00 X:0b Y:e9 SP:01fd YA:e900 nvpbHiZc
+..14f9 beq   $1524            A:00 X:0b Y:e9 SP:01fd YA:e900 nvpbHiZc
+
+..1524 mov   a,$0ad           A:00 X:0b Y:e9 SP:01fd YA:e900 nvpbHiZc
+..1526 beq   $1530            A:00 X:0b Y:e9 SP:01fd YA:e900 nvpbHiZc
+
+..1530 mov   a,$0b4           A:00 X:0b Y:e9 SP:01fd YA:e900 nvpbHiZc
+..1532 beq   $1543            A:00 X:0b Y:e9 SP:01fd YA:e900 nvpbHiZc
+
+..1543 ret                    A:00 X:0b Y:e9 SP:01fd YA:e900 nvpbHiZc
+
 ============
 = Routines =
 ============
@@ -513,6 +776,8 @@ $C7/0170 EB          XBA                     A:0000 X:1E00 Y:0090 P:envMxdIZc
 $C7/0171 48          PHA                     A:0000 X:1E00 Y:0090 P:envMxdIZc
 $C7/0172 FA          PLX                     A:0000 X:1E00 Y:0090 P:envMxdIZc
 $C7/0173 7C D9 0A    JMP ($0AD9,x)[$C7:01A1] A:0000 X:0000 Y:0090 P:envMxdIZc
+
+c7017a jmp $061c     [c7061c] A:1981 X:1e00 Y:0200 S:06ee D:1e00 DB:00 NvMxdIzc V: 16 H:1362
 
 $C7/0192 E2 20       SEP #$20                A:49E0 X:0000 Y:0016 P:eNvMxdIzC
 $C7/0194 64 00       STZ $00    [$00:1E00]   A:49E0 X:0000 Y:0016 P:eNvMxdIzC
@@ -900,6 +1165,7 @@ $C7/0614 85 05       STA $05    [$00:1E05]   A:06E0 X:03F0 Y:06E4 P:envMxdIZC
 $C7/0616 20 12 0A    JSR $0A12  [$C7:0A12]   A:06E0 X:03F0 Y:06E4 P:envMxdIZC
 $C7/0619 4C 92 01    JMP $0192  [$C7:0192]   A:0600 X:000C Y:06E4 P:envMxdIZC
 
+; Simple set values to the SPC700
 c7061c sep #$20               A:0118 X:1e00 Y:0b8f S:06ea D:1e00 DB:00 NvMxdizc V:261 H: 590
 c7061e lda $03       [001e03] A:0118 X:1e00 Y:0b8f S:06ea D:1e00 DB:00 NvMxdizc V:261 H: 614
 c70620 sta $2143     [002143] A:0109 X:1e00 Y:0b8f S:06ea D:1e00 DB:00 nvMxdizc V:261 H: 640
@@ -1036,12 +1302,12 @@ $C7/0A13 E2 20       SEP #$20                A:00C1 X:0060 Y:0090 P:eNvMxdIzC
 $C7/0A15 A2 00 00    LDX #$0000              A:00C1 X:0060 Y:0090 P:eNvMxdIzC
 $C7/0A18 B5 63       LDA $63,x  [$00:1E63]   A:00C1 X:0000 Y:0090 P:envMxdIZC
 $C7/0A1A F0 1B       BEQ $1B    [$0A37]      A:0000 X:0000 Y:0090 P:envMxdIZC
-c70a1c               cmp $f2       [001ef2] A:0454 X:0000 Y:045c S:06ef D:1e00 DB:00 nvMxdIzC V:160 H: 482
-c70a1e               bcs $0a29     [c70a29] A:0454 X:0000 Y:045c S:06ef D:1e00 DB:00 NvMxdIzc V:160 H: 508
-c70a20               inx                    A:0454 X:0000 Y:045c S:06ef D:1e00 DB:00 NvMxdIzc V:160 H: 526
-c70a21               inx                    A:0454 X:0001 Y:045c S:06ef D:1e00 DB:00 nvMxdIzc V:160 H: 584
-c70a22               cpx #$0020             A:0454 X:0002 Y:045c S:06ef D:1e00 DB:00 nvMxdIzc V:160 H: 602
-c70a25               bne $0a18     [c70a18] A:0454 X:0002 Y:045c S:06ef D:1e00 DB:00 NvMxdIzc V:160 H: 626
+c70a1c               cmp $f2       [001ef2]  A:0454 X:0000 Y:045c S:06ef D:1e00 DB:00 nvMxdIzC V:160 H: 482
+c70a1e               bcs $0a29     [c70a29]  A:0454 X:0000 Y:045c S:06ef D:1e00 DB:00 NvMxdIzc V:160 H: 508
+c70a20               inx                     A:0454 X:0000 Y:045c S:06ef D:1e00 DB:00 NvMxdIzc V:160 H: 526
+c70a21               inx                     A:0454 X:0001 Y:045c S:06ef D:1e00 DB:00 nvMxdIzc V:160 H: 584
+c70a22               cpx #$0020              A:0454 X:0002 Y:045c S:06ef D:1e00 DB:00 nvMxdIzc V:160 H: 602
+c70a25               bne $0a18     [c70a18]  A:0454 X:0002 Y:045c S:06ef D:1e00 DB:00 NvMxdIzc V:160 H: 626
 $C7/0A37 28          PLP                     A:0000 X:0000 Y:0090 P:envMxdIZC
 $C7/0A38 60          RTS                     A:0000 X:0000 Y:0090 P:eNvMxdIzC
 
