@@ -348,10 +348,35 @@ c7063b bne $0635     [c70635] A:1981 X:03ff Y:0200 S:06ee D:1e00 DB:00 nvMxdIzc 
 
 ..0299 call  $0b96            A:16 X:00 Y:00 SP:01ff YA:0016 nvpbhiZc
 ..029c mov   y,$0fd           A:00 X:00 Y:ea SP:01ff YA:ea00 nvpbhiZc
-..02ef call  $0377            A:00 X:0b Y:e9 SP:01ff YA:e900 nvpbHiZc
 
+..02ec call  $1492            A:00 X:22 Y:00 SP:01ff YA:0000 nvpbhiZc
+..02ef call  $0377            A:00 X:0b Y:e9 SP:01ff YA:e900 nvpbHiZc
+..02f2 call  $08cd            A:ad X:0e Y:00 SP:01ff YA:00ad Nvpbhizc
+..02f5 bbs4  $087,$0299       A:00 X:00 Y:00 SP:01ff YA:0000 nvpbhiZc
+..02f8 mov   x,#$00           A:00 X:00 Y:00 SP:01ff YA:0000 nvpbhiZc
+..02fa mov   $091,#$01        A:00 X:00 Y:00 SP:01ff YA:0000 nvpbhiZc
+..02fd mov   a,$086           A:00 X:00 Y:00 SP:01ff YA:0000 nvpbhiZc
+..02ff eor   a,#$ff           A:00 X:00 Y:00 SP:01ff YA:0000 nvpbhiZc
+..0301 and   a,$053           A:ff X:00 Y:00 SP:01ff YA:00ff Nvpbhizc
+..0303 and   a,$024           A:7f X:00 Y:00 SP:01ff YA:007f nvpbhizc
+..0305 mov   $0a3,a           A:77 X:00 Y:00 SP:01ff YA:0077 nvpbhizc
+..0307 mov   a,$f161          A:77 X:00 Y:00 SP:01ff YA:0077 nvpbhizc
+..030a mov   $0a8,a           A:ff X:00 Y:00 SP:01ff YA:00ff Nvpbhizc
+..030c bra   $0323            A:ff X:00 Y:00 SP:01ff YA:00ff Nvpbhizc
+..030e mov   $0a6,x           A:ff X:00 Y:00 SP:01ff YA:00ff nvpbhizC
+..0310 mov   a,$086           A:ff X:00 Y:00 SP:01ff YA:00ff nvpbhizC
+..0312 bne   $0319            A:00 X:00 Y:00 SP:01ff YA:0000 nvpbhiZC
+..0314 call  $0903            A:00 X:00 Y:00 SP:01ff YA:0000 nvpbhiZC
 ..0317 bra   $031c            A:00 X:00 Y:01 SP:01ff YA:0100 nvpbhiZc
 ..031c call  $0892            A:00 X:00 Y:01 SP:01ff YA:0100 nvpbhiZc
+..031f inc   x                A:00 X:00 Y:00 SP:01ff YA:0000 nvpbhiZC
+..0320 inc   x                A:00 X:01 Y:00 SP:01ff YA:0000 nvpbhizC
+..0321 asl   $091             A:00 X:02 Y:00 SP:01ff YA:0000 nvpbhizC
+..0323 lsr   $0a3             A:00 X:02 Y:00 SP:01ff YA:0000 nvpbhizc
+..0325 bcs   $030e            A:00 X:02 Y:00 SP:01ff YA:0000 nvpbhizC
+
+..0323 lsr   $0a3             A:ff X:00 Y:00 SP:01ff YA:00ff Nvpbhizc
+..0325 bcs   $030e            A:ff X:00 Y:00 SP:01ff YA:00ff nvpbhizC
 
 ..03a3 mov   $0a6,x           A:0c X:08 Y:81 SP:01fd YA:810c nvpbhizC
 ..03a5 dec   $026+x           A:0c X:08 Y:81 SP:01fd YA:810c nvpbhizC

@@ -51,15 +51,9 @@ variable targetVolume($1E02)
 
 // My own variables
 variable currentSong($1EE0)
-variable fadeState($1EE1)
-variable fadeVolume($1EE2)
-variable fadeTarget($1EE4)
-variable fadeStep($1EE6)
-
-// fadeState possibles values
-constant FADE_STATE_IDLE($00)
-constant FADE_STATE_FADEOUT($01)
-constant FADE_STATE_FADEIN($02)
+variable fadeCount($7E1EE1)
+variable fadeVolume($7E1EE2)
+variable fadeStep($7E1EE4)
 
 // **********
 // * Macros *
@@ -368,7 +362,7 @@ if {defined RESUME_EXPERIMENT} {
 	// Set volume
 	lda.b #FULL_VOLUME
 	sta.w MSU_AUDIO_VOLUME
-	sta.w fadeVolume
+	sta fadeVolume+1
 
 	// Only store current song if we were able to play the song
 	lda.w musicRequested
@@ -377,7 +371,7 @@ if {defined RESUME_EXPERIMENT} {
 	// Set SPC music to silence and disable any fade if any was active
 	lda #$00
 	sta $1E01
-	sta.w fadeState
+	sta fadeCount
 	sec
 	bra .Exit
 
@@ -449,71 +443,73 @@ if {defined RESUME_EXPERIMENT} {
 
 }
 
+// c5f478 
 scope MSU_PrepareFade: {
-	rep #$20
-	lda #$0000
-	sep #$20
-	// musicRequested = Fade Time
+	// musicRequested = timing, targetVolume 
 	lda.w musicRequested
-	beq .SetVolumeImmediate
+	sta fadeCount
+	bne .ComputeFade
 	
-	// fadeStep = (targetVolume-fadeVolume)/fadeTime
+.SetVolumeImmediate:
+	sta fadeStep
+	sta fadeStep+1
+	sta fadeVolume
+	
 	lda.w targetVolume
-	sta.w fadeTarget
+	sta.w MSU_AUDIO_VOLUME
+	sta fadeVolume+1
+
+	bra .Exit
+.ComputeFade:
+	tax // Copy timing to X for later division
+	lda.w targetVolume
+	sec
+	sbc fadeVolume+1
+	beq .SetVolumeImmediate
+	php
+	bcs .IsCarrySet
+	
+	eor #$FF
+	inc
+.IsCarrySet:
+	// targetVolume / timing
+	sta SNES_DIV_DIVIDEND_L
+	stz SNES_DIV_DIVIDEND_H
+	stx SNES_DIV_DIVISOR
+	WaitDivResult()
+	
+	lda SNES_DIV_QUOTIENT_L
+	sta fadeStep+1
+	
+	stz SNES_DIV_DIVIDEND_L
+	lda SNES_MUL_DIV_RESULT_L
+	sta SNES_DIV_DIVIDEND_H
+	stx SNES_DIV_DIVISOR
+	WaitDivResult()
+	
+	lda SNES_DIV_QUOTIENT_L
+	sta fadeStep
+	
+	plp
+	bcs .IsCarrySet2
+	
+	lda fadeStep
+	eor #$FF
+	sta fadeStep
+	lda fadeStep+1
+	eor #$FF
+	sta fadeStep+1
 	
 	rep #$20
-	sec
-	sbc.w fadeVolume
-	// If carry is set, the result is a positive number
-	bcs +
-	
-	// Reverse sign of the result (which in two-complements)
-	// A negative result means a fade-out
-	eor #$FFFF
+	lda fadeStep
 	inc
-	
-	sep #$30
-	ldx.b #FADE_STATE_FADEOUT
-	stx.w fadeState
-	bra .DoDivision
-+
-	sep #$30
-	ldx.b #FADE_STATE_FADEIN
-	stx.w fadeState
-.DoDivision:
-	// Do division using SNES division support
-	sta $4204 // low
-	stz $4205 // high byte
-	lda.w musicRequested // fadeTime
-	sta $4206
-	
-	// Wait 16 CPU cycles
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-
-	// Result in 4214 / 4215
-	lda $4214
-	beq .ResetToIdle
 	sta fadeStep
-	bra .Exit
-
-.SetVolumeImmediate:
-	lda.w targetVolume
-	sta.w fadeVolume
-	sta MSU_AUDIO_VOLUME
+	sep #$20
+	
+.IsCarrySet2:
+	stz fadeVolume
 .Exit:
 	rts
-.ResetToIdle:
-	lda.b #FADE_STATE_IDLE
-	sta.w fadeState
-	sta.w fadeStep
-	bra .SetVolumeImmediate
 }
 
 scope TrackNeedLooping: {
@@ -562,53 +558,26 @@ scope MSU_UpdateLoop: {
 	sep #$20
 
 	CheckMSUPresence(.CallNMI)
+
+	lda frameCounter
+	lsr
+	bcs .CallNMI
 	
-	lda.w fadeState
+	lda fadeCount
 	beq .CallNMI
 	
-	cmp.b #FADE_STATE_FADEOUT
-	beq .FadeOutUpdate
-	cmp.b #FADE_STATE_FADEIN
-	beq .FadeInUpdate
-	bra .CallNMI
+	dec
+	sta fadeCount
 	
-.FadeOutUpdate:
-	lda.w fadeVolume
-	sec
-	rep #$20
-	sbc.w fadeStep
-	cmp.w fadeTarget
-	bpl +
-	sep #$20
-	lda fadeTarget
-+
-	sep #$20
-	sta.w fadeVolume
-	sta MSU_AUDIO_VOLUME
-	cmp.w fadeTarget
-	beq .SetToIdle
-	bra .CallNMI
-
-.FadeInUpdate:
-	lda.w fadeVolume
 	clc
 	rep #$20
-	adc.w fadeStep
-	cmp.w fadeTarget
-	bcc +
-	sep #$20
-	lda fadeTarget
-+
-	sep #$20
-	sta.w fadeVolume
-	sta MSU_AUDIO_VOLUME
-	cmp.w fadeTarget
-	beq .SetToIdle
-	bra .CallNMI
+	lda fadeVolume
+	adc fadeStep
+	sta fadeVolume
 	
-.SetToIdle:
-	lda.b #FADE_STATE_IDLE
-	sta.w fadeState
+	sep #$20
+	lda fadeVolume+1
+	sta MSU_AUDIO_VOLUME
 	
 .CallNMI:
 	rep #$20
