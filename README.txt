@@ -51,7 +51,6 @@ Launch the game and voilà, enjoy !
 
 Notes:
 * Pause actually pause the music (only in Battle)
-* In normal combat with custom music, wrong sfx (hunting grounds Prehistoric)
 
 ===========
 = Credits =

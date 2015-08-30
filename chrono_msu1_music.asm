@@ -155,6 +155,11 @@ seek($FA96B1)
 	// replicated 3 times
 	db $10, $10, 0, 0, 0
 	
+// Fix for in normal combat with custom music, wrong sfx
+// Tell the SPC routine to always load the data
+seek($C70A8B)
+	jmp $0A96
+	
 // Relevant calls to $C70004
 // Found via hex editor by searching for JSL $C70004
 
@@ -384,7 +389,7 @@ if {defined RESUME_EXPERIMENT} {
 	
 	// Set SPC music to silence and disable any fade if any was active
 	lda #$00
-	sta $1E01
+	sta.w musicRequested
 	sta fadeCount
 	
 	// Reset counter for Epoch 1999AD and Ending
