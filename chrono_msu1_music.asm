@@ -112,6 +112,16 @@ seek($C2CBE0)
 	nop
 	nop
 
+// Bike Race ending camera animation fix
+// This is a lazy destructive hijack to the compressed code
+// Original code check if the song has started:
+// 7e475c lda $2143
+// 7e475f and #$0f
+// 7e4761 beq $4771 
+seek($C3257B)
+	lda.b #$01
+	nop
+	
 // Wait for title screen fix
 // This chunk of code is copied into RAM
 // by the decompression routine, that's why

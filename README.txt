@@ -53,7 +53,6 @@ Launch the game and voilà, enjoy !
 
 Notes:
 * Pause actually pause the music (only in Battle)
-* Race Ending Mode 7 animation doesn't work
 * In normal combat with custom music, wrong sfx (hunting grounds Prehistoric)
 
 ===========

@@ -616,6 +616,20 @@ SNESCommunication:
 
 ..1543 ret                    A:00 X:0b Y:e9 SP:01fd YA:e900 nvpbHiZc
 
+======================
+= Bike Race Research =
+======================
+7e475c lda $2143     [002143] A:4700 X:000e Y:00bf S:06dc D:0000 DB:00 nvMxdIZc V: 32 H: 488
+7e475f and #$0f               A:47cf X:000e Y:00bf S:06dc D:0000 DB:00 NvMxdIzc V: 32 H: 488
+7e4761 beq $4771     [7e4771] A:470f X:000e Y:00bf S:06dc D:0000 DB:00 nvMxdIzc V: 32 H: 512
+7e4763 stz $08       [000008] A:470f X:000e Y:00bf S:06dc D:0000 DB:00 nvMxdIzc V: 32 H: 536
+7e4765 ldx #$41a6             A:470f X:000e Y:00bf S:06dc D:0000 DB:00 nvMxdIzc V: 32 H: 608
+7e4768 stx $0a20     [000a20] A:470f X:41a6 Y:00bf S:06dc D:0000 DB:00 nvMxdIzc V: 32 H: 640
+
+// Compressed code
+
+// Little hijack at 0x3257B = $C3257B
+
 ============
 = Routines =
 ============
