@@ -40,23 +40,24 @@ constant BATTLE1_MUSIC($45)
 constant THEME_LOOP($18)
 constant THEME_ATTRACT($54)
 
-constant EPOCH_1999AD_FRAME_WAIT($B0)
+constant ENDING_MUSIC($3F)
+constant EPOCH_1999AD_MUSIC($50)
 
 // =============
 // = Variables =
 // =============
 // Game Variables
-variable frameCounter($7E0400)
 variable musicCommand($1E00)
 variable musicRequested($1E01)
 variable targetVolume($1E02)
 
 // My own variables
-variable currentSong($1EE0)
+variable currentSong($7E1EE0)
 variable fadeCount($7E1EE1)
 variable fadeVolume($7E1EE2)
 variable fadeStep($7E1EE4)
 variable counter($7E1EE6)
+variable frameCounter($7E1EE8)
 
 // **********
 // * Macros *
@@ -136,12 +137,12 @@ seek($C335AF)
 	nop
 	nop
 
-// Epoch 1999 AD sound check
+// Epoch 1999 AD and Ending timing fix
 seek($C30C28)
 SoundCheckSuccessful:
 	// Equivalent to bra $0bb5
 	db $80,$8B
-	jsl MSU_EpochMode7Fix
+	jsl MSU_EpochAndEndingFix
 	bcs SoundCheckSuccessful
 	rts
 
@@ -339,7 +340,7 @@ scope MSU_PlayMusic: {
 	beq .StopMSUMusic
 	cmp.b #$FF
 	beq .SongAlreadyPlaying
-	cmp.w currentSong
+	cmp currentSong
 	beq .SongAlreadyPlaying
 	sta MSU_AUDIO_TRACK_LO
 	lda.b #$00
@@ -385,6 +386,10 @@ if {defined RESUME_EXPERIMENT} {
 	lda #$00
 	sta $1E01
 	sta fadeCount
+	
+	// Reset counter for Epoch 1999AD and Ending
+	sta counter
+	sta counter+1
 	sec
 	bra .Exit
 
@@ -397,7 +402,7 @@ if {defined RESUME_EXPERIMENT} {
 	lda.b #$00
 	sta MSU_AUDIO_CONTROL
 	sta MSU_AUDIO_VOLUME
-	sta.w currentSong
+	sta currentSong
 	sec
 	bra .Exit
 }
@@ -408,7 +413,7 @@ scope MSU_ResumeMusic: {
 	bne .CallOriginalCode
 
 	lda.w musicRequested
-	cmp.w currentSong
+	cmp currentSong
 	beq +
 	
 	jmp MSU_PlayMusic
@@ -556,6 +561,9 @@ scope TrackNeedLooping: {
 	// 2.22 Fiedlord's Keep
 	cmp.b #72
 	beq .noLooping
+	// 3.14 To Far Away Times (Ending)
+	cmp.b #63
+	beq .noLooping
 	lda.b #$03
 	rts
 .noLooping:
@@ -572,6 +580,23 @@ scope MSU_UpdateLoop: {
 
 	CheckMSUPresence(.CallNMI)
 
+	lda frameCounter
+	inc
+	sta frameCounter
+	cmp.b #60
+	bmi .CheckFade
+	lda.b #$0
+	sta frameCounter
+	
+	// Increment counter at each second (each 60 fps)
+	// Will be used to fake timing for Epoch 1999 scene and ending
+	rep #$20
+	lda counter
+	inc
+	sta counter
+	sep #$20
+	
+.CheckFade:
 	lda frameCounter
 	lsr
 	bcs .CallNMI
@@ -658,43 +683,117 @@ scope MSU_WaitSongFinish: {
 	rtl
 }
 
-scope MSU_EpochMode7Fix: {
-	php
-	rep #$20
-	pha
+scope MSU_EpochAndEndingFix: {
 	sep #$20
+	lda currentSong
+	cmp.b #EPOCH_1999AD_MUSIC
+	beq .Epoch
+	cmp.b #ENDING_MUSIC
+	beq .Ending
 	
-	CheckMSUPresence(.OriginalCode)
+	jmp .RoutineSuccessful
 
+.Epoch:
+	rep #$20
 	lda counter
-	cmp.b #EPOCH_1999AD_FRAME_WAIT
-	beq .WaitDone
-	inc counter
 	
-	rep #$20
-	pla
-	plp
-	clc
-	rtl
-	
-.WaitDone:
-	lda #$00
-	sta counter
-	rep #$20
-	pla
-	plp
-	bra .RoutineSuccessful
-	
-.OriginalCode:
-	rep #$20
-	pla
-	plp
--
+	cmp #49
+	bmi +
 	sep #$20
-	lda SPC_COMM_2
-	cmp SPC_COMM_2
-	bne -
+	lda.b #5
+	jmp .OriginalCheck
++
+	cmp #21
+	bmi +
+	sep #$20
+	lda.b #3
+	jmp .OriginalCheck
++
+	cmp #16
+	bmi +
+	sep #$20
+	lda.b #2
+	jmp .OriginalCheck
++
+	cmp #7
+	bmi +
+	sep #$20
+	lda.b #1
+	jmp .OriginalCheck
++
+	sep #$20
+	lda.b #0
+	jmp .OriginalCheck
 	
+.Ending:
+	rep #$20
+	lda counter
+	
+	cmp #280 // $118 or $1801 (little endian)
+	bmi +
+	sep #$20
+	lda.b #$A
+	bra .OriginalCheck
++
+	cmp #253 // $FD 
+	bmi +
+	sep #$20
+	lda.b #$9
+	bra .OriginalCheck
++
+	cmp #193 // $C1
+	bmi +
+	sep #$20
+	lda.b #$8
+	bra .OriginalCheck
++
+	cmp #159 // $9F
+	bmi +
+	sep #$20
+	lda.b #$7
+	bra .OriginalCheck
++
+	cmp #127 // $7F
+	bmi +
+	sep #$20
+	lda.b #$6
+	bra .OriginalCheck
++
+	cmp #104 // $68
+	bmi +
+	sep #$20
+	lda.b #$5
+	bra .OriginalCheck
++
+	cmp #77 // $4D
+	bmi +
+	sep #$20
+	lda.b #$4
+	bra .OriginalCheck
++
+	cmp #45 // $2D
+	bmi +
+	sep #$20
+	lda.b #$3
+	bra .OriginalCheck
++
+	cmp #24 // $18
+	bmi +
+	sep #$20
+	lda.b #$2
+	bra .OriginalCheck
++
+	cmp #17 // $11
+	bmi +
+	sep #$20
+	lda.b #$1
+	bra .OriginalCheck
++
+	sep #$20
+	lda.b #$0
+	bra .OriginalCheck
+	
+.OriginalCheck:
 	and.b #$0F
 	cmp ($20)
 	bpl .RoutineSuccessful

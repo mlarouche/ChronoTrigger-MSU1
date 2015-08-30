@@ -65,7 +65,7 @@ sox LavosScream.wav chrono_3_14_noscream.wav -b 16 chrono_3_14.wav gain -n -1 ra
 
 sox chrono_3_15_raw.wav -b 16 chrono_3_15.wav trim 0 4936488s gain -n -1 rate 44100 dither -s
 sox chrono_3_16_raw.wav -b 16 chrono_3_16.wav trim 0 4519115s gain -n -1 rate 44100 dither -s
-sox chrono_3_17_raw.wav -b 16 chrono_3_17.wav gain -n -1 silence 1 .01 1% rate 44100 dither -s
+sox chrono_3_17_raw.wav -b 16 chrono_3_17.wav trim 0 11583426s gain -n -1 rate 44100 dither -s
 
 rem Theme of Chrono Trigger (Looping version)
 sox chrono_1_02_raw.wav -b 16 chrono_1_02.wav trim 112162s =3369361s gain -n -1 rate 44100 dither -s
