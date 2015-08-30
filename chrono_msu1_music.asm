@@ -375,7 +375,7 @@ if {defined RESUME_EXPERIMENT} {
 	
 	// Set volume
 	lda.b #FULL_VOLUME
-	sta.w MSU_AUDIO_VOLUME
+	sta.l MSU_AUDIO_VOLUME
 	sta fadeVolume+1
 
 	// Only store current song if we were able to play the song
@@ -401,7 +401,7 @@ if {defined RESUME_EXPERIMENT} {
 .StopMSUMusic:
 	lda.b #$00
 	sta MSU_AUDIO_CONTROL
-	sta MSU_AUDIO_VOLUME
+	sta.l MSU_AUDIO_VOLUME
 	sta currentSong
 	sec
 	bra .Exit
@@ -469,17 +469,17 @@ scope MSU_PrepareFade: {
 	bne .ComputeFade
 	
 .SetVolumeImmediate:
+	sta fadeCount
 	sta fadeStep
 	sta fadeStep+1
 	sta fadeVolume
 	
 	lda.w targetVolume
-	sta.w MSU_AUDIO_VOLUME
+	sta.l MSU_AUDIO_VOLUME
 	sta fadeVolume+1
 
 	bra .Exit
 .ComputeFade:
-	tax // Copy timing to X for later division
 	lda.w targetVolume
 	sec
 	sbc fadeVolume+1
@@ -492,17 +492,21 @@ scope MSU_PrepareFade: {
 .IsCarrySet:
 	// targetVolume / timing
 	sta SNES_DIV_DIVIDEND_L
-	stz SNES_DIV_DIVIDEND_H
-	stx SNES_DIV_DIVISOR
+	lda #$00
+	sta SNES_DIV_DIVIDEND_H
+	lda musicRequested
+	sta SNES_DIV_DIVISOR
 	WaitDivResult()
 	
 	lda SNES_DIV_QUOTIENT_L
 	sta fadeStep+1
 	
-	stz SNES_DIV_DIVIDEND_L
+	lda #$00
+	sta SNES_DIV_DIVIDEND_L
 	lda SNES_MUL_DIV_RESULT_L
 	sta SNES_DIV_DIVIDEND_H
-	stx SNES_DIV_DIVISOR
+	lda musicRequested
+	sta SNES_DIV_DIVISOR
 	WaitDivResult()
 	
 	lda SNES_DIV_QUOTIENT_L
