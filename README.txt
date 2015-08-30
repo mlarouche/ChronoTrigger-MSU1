@@ -47,7 +47,6 @@ Launch the game and voilà, enjoy !
 ========
 = TODO =
 ========
-* Credits fix
 * FMV from the PS1 version (Version 2.0)
 
 Notes:

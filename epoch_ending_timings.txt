@@ -1,0 +1,47 @@
+// Ending
+if (time >= 280000)	// reset all our values, the song is done
+else if (time >= 253000)
+	*apuPointer = 0x09;
+else if (time >= 193000)
+	*apuPointer = 0x08;
+else if (time >= 159000)
+	*apuPointer = 0x07;
+else if (time >= 126800)
+	*apuPointer = 0x06;
+else if (time >= 104450)
+	*apuPointer = 0x05;
+else if (time >= 76500)
+	*apuPointer = 0x04;
+else if (time >= 44500)
+	*apuPointer = 0x03;
+else if (time >= 24800)
+	*apuPointer = 0x02;
+else if (time >= 16500)
+	*apuPointer = 0x01;
+	
+0x1 = 16500ms = 16.5s
+0x2 = 24800ms = 24.8s
+0x3 = 44500ms = 44.5s
+0x4 = 76500ms = 76.5s
+0x5 = 104450ms = 104.45s
+0x6 = 126800ms = 126.8s
+0x7 = 159000ms = 159s
+0x8 = 193000ms = 193s
+0x9 = 253000ms = 253s
+0xA = 280000ms = 280s
+
+// Epoch
+if (time >= 49000)
+	*apuPointer = 0x05;		// doesnt do value resetting (like the credits fix) since we have to spam the APU the whole scene
+// I left out 04 cause I never found a need for it when testing (I guess ~.~)
+else if (time >= 20600)
+	*apuPointer = 0x03;
+else if (time >= 15800)
+	*apuPointer = 0x02;
+else if (time >= 7400)
+	*apuPointer = 0x01;
+	
+0x5 = 49000ms = 49s
+0x3 = 20600ms = 20.6s
+0x2 = 15800ms = 15.8s
+0x1 = 7400ms = 7.4s
