@@ -40,6 +40,8 @@ constant BATTLE1_MUSIC($45)
 constant THEME_LOOP($18)
 constant THEME_ATTRACT($54)
 
+constant EPOCH_1999AD_FRAME_WAIT($B0)
+
 // =============
 // = Variables =
 // =============
@@ -54,6 +56,7 @@ variable currentSong($1EE0)
 variable fadeCount($7E1EE1)
 variable fadeVolume($7E1EE2)
 variable fadeStep($7E1EE4)
+variable counter($7E1EE6)
 
 // **********
 // * Macros *
@@ -656,20 +659,36 @@ scope MSU_WaitSongFinish: {
 }
 
 scope MSU_EpochMode7Fix: {
+	php
 	rep #$20
 	pha
 	sep #$20
 	
 	CheckMSUPresence(.OriginalCode)
+
+	lda counter
+	cmp.b #EPOCH_1999AD_FRAME_WAIT
+	beq .WaitDone
+	inc counter
 	
 	rep #$20
 	pla
-	sec
+	plp
+	clc
 	rtl
+	
+.WaitDone:
+	lda #$00
+	sta counter
+	rep #$20
+	pla
+	plp
+	bra .RoutineSuccessful
 	
 .OriginalCode:
 	rep #$20
 	pla
+	plp
 -
 	sep #$20
 	lda SPC_COMM_2

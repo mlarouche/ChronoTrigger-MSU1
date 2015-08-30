@@ -48,7 +48,6 @@ Launch the game and voilà, enjoy !
 = TODO =
 ========
 * Credits fix
-* Epoch 1999 AD Fix: Wait correct number of frames, do not resolve immediately
 * FMV from the PS1 version (Version 2.0)
 
 Notes:
