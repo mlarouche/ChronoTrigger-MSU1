@@ -50,6 +50,7 @@ constant EPOCH_1999AD_MUSIC($50)
 variable musicCommand($1E00)
 variable musicRequested($1E01)
 variable targetVolume($1E02)
+variable soundBankRequested($1E10)
 
 // My own variables
 variable currentSong($7E1EE0)
@@ -158,8 +159,8 @@ seek($FA96B1)
 	
 // Fix for in normal combat with custom music, wrong sfx
 // Tell the SPC routine to always load the data
-seek($C70A8B)
-	jmp $0A96
+seek($C70A8A)
+	jml MSU_BattleSampleHack
 	
 // Relevant calls to $C70004
 // Found via hex editor by searching for JSL $C70004
@@ -864,4 +865,21 @@ scope MSU_EpochAndEndingFix: {
 .RoutineSuccessful:
 	sec
 	rtl
+}
+
+scope MSU_BattleSampleHack: {
+	lda.w soundBankRequested
+	beq .NotInCombat
+
+	jml $C70A96
+
+.NotInCombat:
+	dec
+-
+	cmp $2140
+	beq -
+	pla
+	pla
+	pla
+	jml $C70192
 }
