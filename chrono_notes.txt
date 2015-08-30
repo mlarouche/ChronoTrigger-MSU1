@@ -69,6 +69,7 @@ HiROM 32MBit
 0x3FFC82 ($70)
 0x3FFC97 ($18)
 
+
 ============
 = Research =
 ============
@@ -82,7 +83,8 @@ $1E00 = Command to do
 	$82 = ?
 	$83 = ?
 	$F3 = Set Stereo (0 = Stereo, 1 = Mono)
-$1E01 = SFX/Music to play/Fade info
+	$F5 = Pause/Unpause ($1e01: $F5 = pause, $00 = unpause)
+$1E01 = SFX;Music to play;Fade timing;Pause/Unpause
 
 ; When playing a sample
 $C7/0632 8D 40 21    STA $2140  [$00:2140]   A:0018 X:0400 Y:0001 P:envMxdizc
@@ -291,6 +293,40 @@ c03c39 sta $1e01     [001e01] A:0118 X:013a Y:013a S:06f5 D:0100 DB:00 nvMxdizc 
 7f2206 = 0x3a4962 = $FA4962
 7f22cb = 0x3a24a4 = $FA24A4
 7f236d = 0x3a28fa = $FA28FA
+
+// Pause during combat
+
+; Pressing pause
+70620 sta $2143     [002143] A:0009 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V: 59 H: 276
+c70623 lda $02       [001e02] A:0009 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V: 59 H: 282
+c70625 sta $2142     [002142] A:0080 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V: 59 H: 308
+Breakpoint 2 hit (4).
+c70625 sta $2142     [002142] A:0080 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V: 59 H: 332
+c70628 lda $01       [001e01] A:0080 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V: 59 H: 338
+c7062a sta $2141     [002141] A:00f5 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V: 59 H: 364
+Breakpoint 1 hit (4).
+c7062a sta $2141     [002141] A:00f5 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V: 59 H: 388
+c7062d lda $00       [001e00] A:00f5 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V: 59 H: 394
+c7062f ldx #$0400             A:00f5 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V: 59 H: 420
+c70632 sta $2140     [002140] A:00f5 X:0400 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V: 59 H: 444
+
+
+; Unpause
+c70620 sta $2143     [002143] A:0009 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V:239 H: 888
+c70623 lda $02       [001e02] A:0009 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V:239 H: 894
+c70625 sta $2142     [002142] A:0080 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V:239 H: 920
+Breakpoint 2 hit (5).
+c70625 sta $2142     [002142] A:0080 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V:239 H: 944
+c70628 lda $01       [001e01] A:0080 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V:239 H: 950
+c7062a sta $2141     [002141] A:0000 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 nvMxdiZc V:239 H: 976
+Breakpoint 1 hit (5).
+c7062a sta $2141     [002141] A:0000 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 nvMxdiZc V:239 H:1000
+c7062d lda $00       [001e00] A:0000 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 nvMxdiZc V:239 H:1006
+c7062f ldx #$0400             A:00f5 X:1e00 Y:0000 S:06d3 D:1e00 DB:00 NvMxdizc V:239 H:1032
+c70632 sta $2140     [002140] A:00f5 X:0400 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V:239 H:1056
+Breakpoint 0 hit (5).
+c70632 sta $2140     [002140] A:00f5 X:0400 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V:239 H:1080
+c70635 cmp $2140     [002140] A:00f5 X:0400 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V:239 H:1086
 
 =====================
 = Epoch 1999 AD fix =

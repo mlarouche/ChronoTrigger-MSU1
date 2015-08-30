@@ -49,9 +49,6 @@ Launch the game and voilà, enjoy !
 ========
 * FMV from the PS1 version (Version 2.0)
 
-Notes:
-* Pause actually pause the music (only in Battle)
-
 ===========
 = Credits =
 ===========

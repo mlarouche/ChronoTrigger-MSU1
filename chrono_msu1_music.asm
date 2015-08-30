@@ -58,6 +58,7 @@ variable fadeVolume($7E1EE2)
 variable fadeStep($7E1EE4)
 variable counter($7E1EE6)
 variable frameCounter($7E1EE8)
+variable inCombatHack($7E1EE9)
 
 // **********
 // * Macros *
@@ -239,6 +240,14 @@ seek($CD0D70)
 	
 seek($CD0D81)
 	jsl MSU_Main
+
+// Pause during battle
+seek($CD3E54)
+	jsl MSU_Main
+
+// Unpause during battle
+seek($CD3E70)
+	jsl MSU_Main
 	
 // Hijack for music in attract mode
 seek($DB6E03)
@@ -303,6 +312,13 @@ if {defined RESUME_EXPERIMENT} {
 	cmp.b #$81
 	bne +
 	jsr MSU_PrepareFade
+	bcs .CallOriginalRoutine
+	bcc .DoNotCallSPCRoutine
++
+	// Pause/unpause during battle
+	cmp.b #$F5
+	bne +
+	jsr MSU_PauseUnpause
 +
 // Call original routine
 .CallOriginalRoutine:
@@ -413,6 +429,9 @@ if {defined RESUME_EXPERIMENT} {
 }
 
 scope MSU_ResumeMusic: {
+	lda #$00
+	sta inCombatHack
+	
 	lda MSU_STATUS
 	and.b #MSU_STATUS_TRACK_MISSING
 	bne .CallOriginalCode
@@ -453,6 +472,9 @@ if {defined RESUME_EXPERIMENT} {
 	jml MSU_PlayMusic
 	
 .PauseMSUMusic:
+	lda #$01
+	sta inCombatHack
+	
 	lda MSU_STATUS
 	and.b #MSU_STATUS_TRACK_MISSING
 	bne +
@@ -535,6 +557,34 @@ scope MSU_PrepareFade: {
 	
 .IsCarrySet2:
 	stz fadeVolume
+.Exit:
+	rts
+}
+
+scope MSU_PauseUnpause: {
+	lda MSU_STATUS
+	and.b #MSU_STATUS_TRACK_MISSING
+	bne .Exit
+	
+if {defined RESUME_EXPERIMENT} {
+} else {
+	lda inCombatHack
+	bne .Exit
+}
+
+	lda.w musicRequested
+	cmp.b #$F5
+	bne .Unpause
+	
+.Pause:
+	lda.b #$00
+	sta MSU_AUDIO_CONTROL
+	
+	bra .Exit
+.Unpause:
+	lda.b #$03
+	sta MSU_AUDIO_CONTROL
+	
 .Exit:
 	rts
 }
