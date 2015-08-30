@@ -4,7 +4,7 @@ by DarkShock
 
 THIS IS A WORK IN PROGRESS !
 
-This hack adds CD quality audio to Chrono trigger using the MSU-1 chip invented by byuu. For next version I do hope to include the FMV from the PS1 version !
+This hack adds CD quality audio to Chrono Trigger using the MSU-1 chip invented by byuu. For next version I do hope to include the FMV from the PS1 version !
 
 The hack has been tested on bsnes-plus v073+1, higan 094 and SD2SNES. BSNES 070, 075 is NOT RECOMMENDED, use bsnes-plus v073.
 
@@ -47,19 +47,14 @@ Launch the game and voilà, enjoy !
 ========
 = TODO =
 ========
-* Use correct timing for fade-in/fade-out
 * Credits fix
 * Epoch 1999 AD Fix: Wait correct number of frames, do not resolve immediately
 * FMV from the PS1 version (Version 2.0)
 
 Notes:
 * Pause actually pause the music (only in Battle)
-* Fade Bug Trial Rainbow Shell
-* Fade Bug Cyrus Tomb
-* Fade Bug Zeal 2
 * Race Ending Mode 7 animation doesn't work
 * In normal combat with custom music, wrong sfx (hunting grounds Prehistoric)
-* Medina Donjon Bleu Fade
 
 ===========
 = Credits =
