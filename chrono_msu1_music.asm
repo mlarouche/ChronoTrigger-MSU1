@@ -34,7 +34,6 @@ constant SNES_MUL_DIV_RESULT_H($004217)
 
 // Constants
 constant FULL_VOLUME($FF)
-constant DUCKED_VOLUME($30)
 
 constant BATTLE1_MUSIC($45)
 constant THEME_LOOP($18)
@@ -398,7 +397,6 @@ if {defined RESUME_EXPERIMENT} {
 	// Set volume
 	lda.b #FULL_VOLUME
 	sta.l MSU_AUDIO_VOLUME
-	sta fadeVolume+1
 
 	// Only store current song if we were able to play the song
 	lda.w musicRequested
@@ -407,7 +405,6 @@ if {defined RESUME_EXPERIMENT} {
 	// Set SPC music to silence and disable any fade if any was active
 	lda #$00
 	sta.w musicRequested
-	sta fadeCount
 	
 	// Reset counter for Epoch 1999AD and Ending
 	sta counter
@@ -430,6 +427,12 @@ if {defined RESUME_EXPERIMENT} {
 }
 
 scope MSU_ResumeMusic: {
+	// Little hack to fix issues in Ozzie's Fort
+	// where the game calls $11 instead of $10 to play
+	// dungeon music and $10 to play normal combat music
+	lda inCombatHack
+	beq .PlayMusic
+	
 	lda #$00
 	sta inCombatHack
 	
@@ -437,6 +440,7 @@ scope MSU_ResumeMusic: {
 	and.b #MSU_STATUS_TRACK_MISSING
 	bne .CallOriginalCode
 
+.PlayMusic:
 	lda.w musicRequested
 	cmp currentSong
 	beq +
