@@ -82,6 +82,7 @@ $1E00 = Command to do
 	$81 = Fade
 	$82 = ?
 	$83 = ?
+	$F2 = Stop music ?
 	$F3 = Set Stereo (0 = Stereo, 1 = Mono)
 	$F5 = Pause/Unpause ($1e01: $F5 = pause, $00 = unpause)
 $1E01 = SFX;Music to play;Fade timing;Pause/Unpause
@@ -327,6 +328,21 @@ c70632 sta $2140     [002140] A:00f5 X:0400 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc 
 Breakpoint 0 hit (5).
 c70632 sta $2140     [002140] A:00f5 X:0400 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V:239 H:1080
 c70635 cmp $2140     [002140] A:00f5 X:0400 Y:0000 S:06d3 D:1e00 DB:00 nvMxdizc V:239 H:1086
+
+7e3194 sta $1e00     [001e00] A:43f2 X:03d3 Y:0090 S:06fb D:0000 DB:00 NvMxdIzC V:152 H: 490
+7e3197 jsr $377e     [7e377e] A:43f2 X:03d3 Y:0090 S:06fb D:0000 DB:00 NvMxdIzC V:152 H: 498
+7e377e sep #$20               A:43f2 X:03d3 Y:0090 S:06f9 D:0000 DB:00 NvMxdIzC V:152 H: 592
+7e3780 ldx #$0400             A:43f2 X:03d3 Y:0090 S:06f9 D:0000 DB:00 NvMxdIzC V:152 H: 622
+7e3783 lda $1e03     [001e03] A:43f2 X:0400 Y:0090 S:06f9 D:0000 DB:00 nvMxdIzC V:152 H: 654
+7e3786 sta $2143     [002143] A:4305 X:0400 Y:0090 S:06f9 D:0000 DB:00 nvMxdIzC V:152 H: 694
+7e3789 lda $1e02     [001e02] A:4305 X:0400 Y:0090 S:06f9 D:0000 DB:00 nvMxdIzC V:152 H: 732
+7e378c sta $2142     [002142] A:4300 X:0400 Y:0090 S:06f9 D:0000 DB:00 nvMxdIZC V:152 H: 772
+7e378f lda $1e01     [001e01] A:4300 X:0400 Y:0090 S:06f9 D:0000 DB:00 nvMxdIZC V:152 H: 810
+7e3792 sta $2141     [002141] A:4300 X:0400 Y:0090 S:06f9 D:0000 DB:00 nvMxdIZC V:152 H: 850
+7e3795 lda $1e00     [001e00] A:4300 X:0400 Y:0090 S:06f9 D:0000 DB:00 nvMxdIZC V:152 H: 888
+7e3798 sta $2140     [002140] A:43f2 X:0400 Y:0090 S:06f9 D:0000 DB:00 NvMxdIzC V:152 H: 928
+7e379b cmp $2140     [002140] A:43f2 X:0400 Y:0090 S:06f9 D:0000 DB:00 NvMxdIzC V:152 H: 966
+7e379e beq $37a5     [7e37a5] A:43f2 X:0400 Y:0090 S:06f9 D:0000 DB:00 nvMxdIzC V:152 H:1004
 
 =====================
 = Epoch 1999 AD fix =

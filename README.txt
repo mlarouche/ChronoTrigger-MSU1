@@ -4,7 +4,7 @@ by DarkShock
 
 THIS IS A WORK IN PROGRESS !
 
-This hack adds CD quality audio to Chrono Trigger using the MSU-1 chip invented by byuu. For next version I do hope to include the FMV from the PS1 version !
+This hack adds CD quality audio to Chrono Trigger using the MSU-1 chip invented by byuu.
 
 The hack has been tested on bsnes-plus v073+1, higan 094 and SD2SNES. BSNES 070, 075 is NOT RECOMMENDED, use bsnes-plus v073.
 
@@ -43,11 +43,6 @@ Checksum (CRC32): 0x2d206bf7
 ====================
 Drop the ROM file, chrono_msu1.msu and the .pcm files in any folder. (I really suggest creating a folder)
 Launch the game and voilà, enjoy !
-
-========
-= TODO =
-========
-* FMV from the PS1 version (Version 2.0)
 
 ===========
 = Credits =

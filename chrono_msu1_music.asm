@@ -559,6 +559,7 @@ scope MSU_PrepareFade: {
 .IsCarrySet2:
 	stz fadeVolume
 .Exit:
+	sec
 	rts
 }
 
