@@ -1,12 +1,12 @@
-Chrono Trigger MSU-1 hack
-Version 1.0 (WIP)
+Chrono Trigger MSU-1
+Version 1.0
 by DarkShock
-
-THIS IS A WORK IN PROGRESS !
 
 This hack adds CD quality audio to Chrono Trigger using the MSU-1 chip invented by byuu.
 
 The hack has been tested on bsnes-plus v073+1, higan 094 and SD2SNES. BSNES 070, 075 is NOT RECOMMENDED, use bsnes-plus v073.
+
+For those playing on SD2SNES, you need to exit to menu using L+R+Select+X shortcut in order to save your game.
 
 ================
 = Installation =
@@ -63,6 +63,7 @@ To compile the hack you need
 
 * bass v14 (https://web.archive.org/web/20140710190910/http://byuu.org/files/bass_v14.tar.xz)
 * flac (https://xiph.org/flac/download.html)
+* sox (http://sox.sourceforge.net/)
 * wav2msu (https://github.com/mlarouche/wav2msu)
 
 To distribute the hack you need
@@ -72,6 +73,7 @@ To distribute the hack you need
 
 create_pcm.bat create the .pcm from the WAV files
 decode_flac.bat decode the FLAC from the Chrono Symphony album
+edit_audio.bat edit the audio using SoX
 distribute.bat distribute the patch
 make_music_pack.bat calls required bats for creating the music pack.
 make.bat assemble the patch
