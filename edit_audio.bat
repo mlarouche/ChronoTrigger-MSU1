@@ -11,7 +11,7 @@ sox chrono_1_09_raw.wav -b 16 chrono_1_09.wav trim 0 4172220s gain -n -1 rate 44
 sox chrono_1_10_raw.wav -b 16 chrono_1_10.wav trim 1557716s =1962187s gain -n -1 rate 44100 dither -s
 sox chrono_1_11_raw.wav -b 16 chrono_1_11.wav trim 0 5928007s gain -n -1 rate 44100 dither -s
 rem Battle 1
-rem sox chrono_1_12_raw.wav -b 16 chrono_1_12.wav trim 0 3669699s gain -n -1 rate 44100 dither -s
+sox chrono_1_12_raw.wav -b 16 chrono_1_12.wav trim 0 3669699s gain -n -1 rate 44100 dither -s
 sox chrono_1_13_raw.wav -b 16 chrono_1_13.wav trim 0 4755760s gain -n -1 rate 44100 dither -s
 sox chrono_1_14_raw.wav -b 16 chrono_1_14.wav trim 1264427s =1474332s gain -n -1  rate 44100 dither -s
 sox chrono_1_15_raw.wav -b 16 chrono_1_15.wav trim 0 4308404s gain -n -1 rate 44100 dither -s

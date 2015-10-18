@@ -389,6 +389,8 @@ if {defined RESUME_EXPERIMENT} {
 	
 	// Add resume flag
 	ora.b #$4
+	sta MSU_AUDIO_CONTROL
+	bra SkipSetVolume
 .SetAudioControl:
 }
 
@@ -398,6 +400,9 @@ if {defined RESUME_EXPERIMENT} {
 	lda.b #FULL_VOLUME
 	sta.l MSU_AUDIO_VOLUME
 
+if {defined RESUME_EXPERIMENT} {
+SkipSetVolume:
+}
 	// Only store current song if we were able to play the song
 	lda.w musicRequested
 	sta currentSong
