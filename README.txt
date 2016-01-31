@@ -1,12 +1,18 @@
 Chrono Trigger MSU-1
-Version 1.0
+Version 1.1
 by DarkShock
 
 This hack adds CD quality audio to Chrono Trigger using the MSU-1 chip invented by byuu.
 
-The hack has been tested on bsnes-plus v073+1, higan 094 and SD2SNES. BSNES 070, 075 is NOT RECOMMENDED, use bsnes-plus v073.
+The hack has been tested on bsnes-plus v073+1, higan 096 and SD2SNES. BSNES 070, 075 is NOT RECOMMENDED, use bsnes-plus v073.
 
 For those playing on SD2SNES, you need to exit to menu using L+R+Select+X shortcut in order to save your game.
+
+Note they are two patches
+- chrono_msu1.ips for emulators prior to higan v096 and SD2SNES without resume support
+- chrono_msu1_resume.ips for higan v096 and up and SD2SNES with resume support
+
+If you hate the fact that dungeon music restarts at the beginning with no-resume patch, delete chrono_msu1-69.pcm.
 
 ================
 = Installation =
