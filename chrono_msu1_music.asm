@@ -388,7 +388,6 @@ if {defined RESUME_EXPERIMENT} {
 	bne .SetAudioControl
 	
 	// Add resume flag
-	ora.b #$4
 	sta MSU_AUDIO_CONTROL
 	bra SkipSetVolume
 .SetAudioControl:

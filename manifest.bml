@@ -65,6 +65,7 @@ cartridge region=NTSC
     track number=64 name=chrono_msu1-64.pcm
     track number=66 name=chrono_msu1-66.pcm
     track number=68 name=chrono_msu1-68.pcm
+    track number=69 name=chrono_msu1-69.pcm
     track number=70 name=chrono_msu1-70.pcm
     track number=72 name=chrono_msu1-72.pcm
     track number=73 name=chrono_msu1-73.pcm
